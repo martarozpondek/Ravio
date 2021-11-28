@@ -1,0 +1,52 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Ravio.Entities;
+
+namespace Ravio.WebAPI
+{
+    public class DatabaseContext : IdentityDbContext<UserEntity, IdentityRole<int>, int>
+    {
+        public DatabaseContext() : base()
+        {
+
+        }
+
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+        {
+
+        }
+
+        public DatabaseContext(DbContextOptions<DatabaseContext> options, IConfiguration configuration) : base(options)
+        {
+            Configuration = configuration;
+        }
+
+        private IConfiguration Configuration { get; }
+
+        public virtual DbSet<UserEntity> Accounts { get; set; }
+        public virtual DbSet<GenderType> GenderTypes { get; set; }
+        public virtual DbSet<LifestyleType> LifestyleTypes { get; set; }
+        public virtual DbSet<TargetType> TargetTypes { get; set; }
+        public virtual DbSet<BodyMessurementsEntity> BodiesMessurements { get; set; }
+
+        public virtual DbSet<WorkoutEntity> Workouts { get; set; }
+        public virtual DbSet<WorkoutResultEntity> WorkoutsResults { get; set; }
+
+        public virtual DbSet<ExerciseEntity> Exercises { get; set; }
+        public virtual DbSet<ExerciseResultEntity> ExercisesResults { get; set; }
+
+        public virtual DbSet<FoodEntity> Food { get; set; }
+        public virtual DbSet<FoodResultEntity> FoodResults { get; set; }
+
+        public virtual DbSet<AwardEntity> Awards { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("Ravio"));
+        }
+    }
+}

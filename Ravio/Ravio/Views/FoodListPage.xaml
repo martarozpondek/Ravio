@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:Ravio.ViewModels"
+    x:Class="Ravio.Views.FoodListPage"
+    Title="FoodList">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/FoodListPageResourceDictionary.xaml"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <ViewModels:FoodListPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <FlexLayout Direction="Column" JustifyContent="SpaceAround" AlignItems="Center">
+                <StackLayout>
+                    <Label Text="ŚNIADANIE"/>
+                    <Button Command="{Binding GoToSearchFoodPageCommand}" CommandParameter="Breakfast"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" BindableLayout.ItemsSource="{Binding BreakfastList}" BindableLayout.ItemTemplate="{StaticResource MealsListItemTemplate}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="LUNCH "/>
+                    <Button Command="{Binding GoToSearchFoodPageCommand}" CommandParameter="Lunch"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" BindableLayout.ItemsSource="{Binding LunchList}" BindableLayout.ItemTemplate="{StaticResource MealsListItemTemplate}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="OBIAD" />
+                    <Button Command="{Binding GoToSearchFoodPageCommand}" CommandParameter="Dinner"/>
+                </StackLayout>
+                <StackLayout  Orientation="Vertical">
+                    <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" BindableLayout.ItemsSource="{Binding DinnerList}" BindableLayout.ItemTemplate="{StaticResource MealsListItemTemplate}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="KOLACJA" />
+                    <Button Command="{Binding GoToSearchFoodPageCommand}" CommandParameter="Supper"/>
+                </StackLayout>
+                <StackLayout  Orientation="Vertical">
+                    <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" BindableLayout.ItemsSource="{Binding SupperList}" BindableLayout.ItemTemplate="{StaticResource MealsListItemTemplate}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="PRZEKĄSKA" />
+                    <Button Command="{Binding GoToSearchFoodPageCommand}" CommandParameter="Snacks"/>
+                </StackLayout>
+                <StackLayout  Orientation="Vertical">
+                    <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" BindableLayout.ItemsSource="{Binding SnacksList}" BindableLayout.ItemTemplate="{StaticResource MealsListItemTemplate}"/>
+                </StackLayout>
+            </FlexLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

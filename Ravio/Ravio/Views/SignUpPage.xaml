@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:Ravio.ViewModels"
+    x:Class="Ravio.Views.SignUpPage"
+    Title="Sign Up">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/SignUpPageResourceDictionary.xaml"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <ViewModels:SignUpPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <FlexLayout Direction="Column" JustifyContent="SpaceEvenly" AlignItems="Center">
+            <Label Text="Zarejestruj się" Style="{StaticResource SignUpTitle}"/>
+            <StackLayout>
+                <Label Text="Nazwa użytkownika: "/>
+                <Entry Text="{Binding UserSignUpRequest.UserName}"/>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Hasło: "/>
+                <Entry Text="{Binding UserSignUpRequest.Password}" IsPassword="True"/>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Email: "/>
+                <Entry Text="{Binding UserSignUpRequest.Email}"/>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Numer telefonu: "/>
+                <Entry Text="{Binding UserSignUpRequest.PhoneNumber}"/>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Data Urodzenia: "/>
+                <DatePicker Date="{Binding UserSignUpRequest.BirthDate}" />
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Płeć: "/>
+                <Picker ItemsSource="{Binding Genders}" SelectedItem="{Binding UserSignUpRequest.Gender}"/>
+            </StackLayout>
+            <Button Text="Dalej" Command="{Binding SignUpCommand}"/>
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>

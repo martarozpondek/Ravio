@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ravio.Android", "Ravio\Ravio.Android\Ravio.Android.csproj", "{2995CD45-C374-4235-B236-F27846439F45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ravio", "Ravio\Ravio\Ravio.csproj", "{E20C87C3-69FD-491A-AECD-2D1CBE62EEBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ravio.WebAPI", "Ravio.WebAPI\Ravio.WebAPI.csproj", "{EB2FB881-0F81-4FE1-BFC4-5D3820E2ACD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ravio.Entities", "Ravio.Entities\Ravio.Entities.csproj", "{9F9382F9-AF2B-4F1A-BE64-69AEC3BC5EBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ravio.Requests", "Ravio.Requests\Ravio.Requests.csproj", "{946C5563-D175-456D-BBCD-2943456F7609}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ravio.Responses", "Ravio.Responses\Ravio.Responses.csproj", "{88D3CE2E-75D8-42D0-B8F0-852A9DC10D61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2995CD45-C374-4235-B236-F27846439F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2995CD45-C374-4235-B236-F27846439F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2995CD45-C374-4235-B236-F27846439F45}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2995CD45-C374-4235-B236-F27846439F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2995CD45-C374-4235-B236-F27846439F45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2995CD45-C374-4235-B236-F27846439F45}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E20C87C3-69FD-491A-AECD-2D1CBE62EEBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E20C87C3-69FD-491A-AECD-2D1CBE62EEBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E20C87C3-69FD-491A-AECD-2D1CBE62EEBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E20C87C3-69FD-491A-AECD-2D1CBE62EEBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB2FB881-0F81-4FE1-BFC4-5D3820E2ACD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2FB881-0F81-4FE1-BFC4-5D3820E2ACD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2FB881-0F81-4FE1-BFC4-5D3820E2ACD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2FB881-0F81-4FE1-BFC4-5D3820E2ACD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F9382F9-AF2B-4F1A-BE64-69AEC3BC5EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F9382F9-AF2B-4F1A-BE64-69AEC3BC5EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F9382F9-AF2B-4F1A-BE64-69AEC3BC5EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F9382F9-AF2B-4F1A-BE64-69AEC3BC5EBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{946C5563-D175-456D-BBCD-2943456F7609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{946C5563-D175-456D-BBCD-2943456F7609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{946C5563-D175-456D-BBCD-2943456F7609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{946C5563-D175-456D-BBCD-2943456F7609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D3CE2E-75D8-42D0-B8F0-852A9DC10D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D3CE2E-75D8-42D0-B8F0-852A9DC10D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D3CE2E-75D8-42D0-B8F0-852A9DC10D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D3CE2E-75D8-42D0-B8F0-852A9DC10D61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A787BF37-49EF-4772-BD3E-559751162081}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:Ravio.ViewModels"
+    x:Class="Ravio.Views.HomePage"
+    Title="Home">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/HomePageResourceDictionary.xaml"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <ViewModels:HomePageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
+            <Frame>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToComponentCommand}" CommandParameter="WorkoutsPage"/>
+                </Frame.GestureRecognizers>
+                <Label Text="Treningi"/>
+            </Frame>
+            <Frame>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToComponentCommand}" CommandParameter="ExercisesPage"/>
+                </Frame.GestureRecognizers>
+                <Label Text="Ćwiczenia"/>
+            </Frame>
+            <Frame>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToComponentCommand}" CommandParameter="FoodPage"/>
+                </Frame.GestureRecognizers>
+                <Label Text="Jedzenie"/>
+            </Frame>
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>

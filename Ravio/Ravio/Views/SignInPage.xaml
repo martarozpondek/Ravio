@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:Ravio.ViewModels"
+    x:Class="Ravio.Views.SignInPage"
+    Title="Sign In">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/SignInPageResourceDictionary.xaml"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <ViewModels:SignInPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Nazwa użytkownika: " />
+                <Entry Text="{Binding UserSignInRequest.UserName}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Hasło: " />
+                <Entry Text="{Binding UserSignInRequest.Password}" IsPassword="True"/>
+            </StackLayout>
+            <Label Text="{Binding Error}" Style="{StaticResource Error}"/>
+            <Frame WidthRequest="385" HasShadow="False">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding GoToSignUpPageCommand}"/>
+                </Frame.GestureRecognizers>
+                <Label Text="Nie masz konta? Zarejestruj się!" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="#6336E0"/>
+            </Frame>
+            <Button Text="Zaloguj się" Command="{Binding SignInCommand}"/>
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>

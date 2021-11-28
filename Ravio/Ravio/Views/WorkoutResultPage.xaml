@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:Ravio.ViewModels"
+    xmlns:Maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    x:Class="Ravio.Views.WorkoutResultPage">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/WorkoutResultPageResourceDictionary.xaml"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <ViewModels:WorkoutResultPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="65"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Frame Content="{Binding Map}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <FlexLayout JustifyContent="SpaceAround" AlignItems="Center" Direction="Row" Wrap="Wrap">
+                    <StackLayout>
+                        <Label Text="Kalorie:" Style="{StaticResource Title}"/>
+                        <Label Text="{Binding WorkoutResult.Calories, StringFormat='{0} kcal'}"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Dystans:" Style="{StaticResource Title}"/>
+                        <Label Text="{Binding WorkoutResult.Distance, StringFormat='{0} km'}"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Średnia prędkość:" Style="{StaticResource Title}"/>
+                        <Label Text="{Binding WorkoutResult.AverageSpeed, StringFormat='{0} km/h'}"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Czas startu:" Style="{StaticResource Title}"/>
+                        <Label Text="{Binding WorkoutResult.StartTime, StringFormat='{0:HH\\:mm\\:ss}'}"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Czas końca:" Style="{StaticResource Title}"/>
+                        <Label Text="{Binding WorkoutResult.EndTime, StringFormat='{0:HH\\:mm\\:ss}'}"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Łączny czas:" Style="{StaticResource Title}"/>
+                        <Label Text="{Binding WorkoutResult.Time, StringFormat='{0:HH\\:mm\\:ss}'}"/>
+                    </StackLayout>
+                </FlexLayout>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button Text="Wyjście" Command="{Binding GoToHomePageCommand}" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

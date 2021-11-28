@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Views="clr-namespace:Ravio.Views"
+    x:Class="Ravio.AppShell"
+    Shell.NavBarIsVisible="False"
+    Shell.BackgroundColor="{StaticResource SecondaryBackgroundColor}"
+    Shell.TitleColor="{StaticResource AccentColor}"
+    Shell.UnselectedColor="{StaticResource SecondaryForegroundColor}"
+    Title="Ravio">
+    <TabBar>
+        <ShellContent Title="Strona główna" Icon="HomePage.png" Route="HomePage" ContentTemplate="{DataTemplate Views:HomePage}"/>
+        <ShellContent Title="Wiadomości" Icon="NewsPage.png" Route="NewsPage" ContentTemplate="{DataTemplate Views:NewsPage}"/>
+        <ShellContent Title="Profil" Icon="ProfilePage.png" Route="ProfilePage" ContentTemplate="{DataTemplate Views:ProfilePage}"/>
+    </TabBar>
+</Shell>

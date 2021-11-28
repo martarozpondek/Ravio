@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style TargetType="StackLayout">
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="VerticalOptions" Value="Center" />
+
+    </Style>
+    <Style TargetType="Label" >
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="WidthRequest" Value="100" />
+        <Setter Property="HeightRequest" Value="20" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="CornerRadius" Value="100" />
+        <Setter Property="BorderColor" Value="#6336E0" />
+        <Setter Property="BorderWidth" Value="3" />
+        <Setter Property="WidthRequest" Value="40" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="Text" Value="+" />
+        <Setter Property="TextColor" Value="#6336E0" />
+    </Style>
+    <DataTemplate x:Key="MealsListItemTemplate">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label Text="{Binding Name}"/>
+            <Label Text="{Binding Calories, StringFormat='{0} kcal'}"/>
+            <Label Text="{Binding Grams, StringFormat='{0} g'}"/>
+        </StackLayout>
+    </DataTemplate>
+</ResourceDictionary>

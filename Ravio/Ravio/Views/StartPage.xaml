@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:Ravio.ViewModels"
+    x:Class="Ravio.Views.StartPage"
+    Title="Start">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/StartPageResourceDictionary.xaml"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <ViewModels:StartPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <FlexLayout Direction="Column" JustifyContent="SpaceEvenly" AlignItems="Center">
+            <StackLayout>
+                <Label Text="Ravio Health" Style="{StaticResource Title}"/>
+                <Label Text="Witam Cię w Ravio Health. Dzięki tej aplikacji poznasz sposoby racjonalnego żywienia, utrzymania ciała w dobrej kondycji i monitorowanie swoich wyników" Style="{StaticResource Description}"/>
+            </StackLayout>
+            <StackLayout>
+                <Button Text="Zaloguj się" Command="{Binding GoToSignInPageCommand}"/>
+                <Button Text="Zarejestruj się" Command="{Binding GoToSignUpPageCommand}"/>
+            </StackLayout>
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:Ravio.ViewModels"
+    x:Class="Ravio.Views.WorkoutsStatisticsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/WorkoutsStatisticsPageResourceDictionary.xaml"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <ViewModels:WorkoutsStatisticsPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="0">
+                <ListView ItemsSource="{Binding WorkoutsResults}" ItemTemplate="{StaticResource WorkoutsResultsListItemTemplate}" RowHeight="50" HeaderTemplate="{StaticResource WorkoutsResultsListHeaderTemplate}">
+                    <ListView.Header>
+                        <ViewCell/>
+                    </ListView.Header>
+                </ListView>
+            </ScrollView>
+            <ScrollView Grid.Row="1">
+                <ListView ItemsSource="{Binding Awards}" ItemTemplate="{StaticResource AwardsListItemTemplate}" RowHeight="100" HeaderTemplate="{StaticResource AwardsListHeaderTemplate}">
+                    <ListView.Header>
+                        <ViewCell/>
+                    </ListView.Header>
+                </ListView>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

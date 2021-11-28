@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <DataTemplate x:Key="NewsItemTemplate">
+        <Frame Margin="25" CornerRadius="10" BorderColor="{StaticResource AccentColor}" BackgroundColor="{StaticResource SecondaryBackgroundColor}" HasShadow="True">
+            <FlexLayout WidthRequest="300" HeightRequest="350" Direction="Column" JustifyContent="SpaceEvenly" AlignItems="Center">
+                <Image Source="{Binding UrlToImage}"/>
+                <Label Text="{Binding Title}" FontSize="15"/>
+                <Label Text="{Binding Description}" FontSize="10"/>
+                <Label Text="{Binding Author}" FontSize="9"/>
+            </FlexLayout>
+        </Frame>
+    </DataTemplate>
+
+    <Style TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+    </Style>
+</ResourceDictionary>

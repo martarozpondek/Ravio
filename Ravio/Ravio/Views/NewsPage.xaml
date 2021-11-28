@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ViewModels="clr-namespace:Ravio.ViewModels"
+    x:Class="Ravio.Views.NewsPage"
+    Title="News">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../ResourceDictionaries/NewsPageResourceDictionary.xaml"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <ViewModels:NewsPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <RefreshView>
+            <ScrollView>
+                <FlexLayout BindableLayout.ItemsSource="{Binding Articles}" BindableLayout.ItemTemplate="{StaticResource NewsItemTemplate}" Direction="Column" JustifyContent="SpaceBetween" AlignItems="Center"/>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>
