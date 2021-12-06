@@ -5,7 +5,7 @@
     xmlns:Views="clr-namespace:Ravio.Views"
     x:Class="Ravio.Views.FoodPage"
     BarBackgroundColor="{StaticResource AccentColor}"
-    BarTextColor="{StaticResource PrimaryForegroundColor}"
+    BarTextColor="{StaticResource PrimaryBackgroundColor}"
     Title="Food">
     <Views:FoodListPage Title="Posiłki"/>
     <Views:FoodStatisticsPage Title="Statystyki i nagrody"/>

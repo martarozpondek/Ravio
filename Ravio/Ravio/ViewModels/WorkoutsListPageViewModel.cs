@@ -10,7 +10,7 @@ namespace Ravio.ViewModels
     {
         public WorkoutsListPageViewModel()
         {
-            GoToWorkoutPageCommand = new Command(async () => { await Shell.Current.GoToAsync("WorkoutPage"); });
+            StartWorkoutCommand = new Command<string>(StartWorkout);
 
             Workouts = new List<WorkoutEntity>() { new WorkoutEntity() { Name = "Bieganie" }, new WorkoutEntity() { Name = "Rower" } };
         }
@@ -24,6 +24,10 @@ namespace Ravio.ViewModels
             set { SetProperty(ref workouts, value); }
         }
 
-        public Command GoToWorkoutPageCommand { get; set; }
+        public Command<string> StartWorkoutCommand { get; set; }
+        private async void StartWorkout(string workoutName)
+        {
+            await Shell.Current.GoToAsync($"WorkoutPage?workoutName={workoutName}");
+        }
     }
 }

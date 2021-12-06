@@ -2,9 +2,23 @@
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <DataTemplate x:Key="WorkoutItemTemplate">
-        <FlexLayout JustifyContent="Center" AlignItems="Center">
-            <Label Text="{Binding Name}"/>
-        </FlexLayout>
-    </DataTemplate>
+    <Style TargetType="Frame">
+        <Setter Property="BorderColor" Value="{StaticResource AccentColor}" />
+        <Setter Property="CornerRadius" Value="20" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryForegroundColor}" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryBackgroundColor}" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Margin" Value="50 20 15 20" />
+    </Style>
 </ResourceDictionary>

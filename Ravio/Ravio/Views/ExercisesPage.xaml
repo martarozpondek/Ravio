@@ -5,7 +5,7 @@
     xmlns:Views="clr-namespace:Ravio.Views"
     x:Class="Ravio.Views.ExercisesPage"
     BarBackgroundColor="{StaticResource AccentColor}"
-    BarTextColor="{StaticResource PrimaryForegroundColor}"
+    BarTextColor="{StaticResource PrimaryBackgroundColor}"
     Title="Exercises">
     <Views:ExercisesListPage Title="Wybór ćwiczeń"/>
     <Views:ExercisesStatisticsPage Title="Statystyki i nagrody"/>

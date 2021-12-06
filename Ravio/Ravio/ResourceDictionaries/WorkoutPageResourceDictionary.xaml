@@ -2,5 +2,14 @@
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    
+    <Style TargetType="Frame">
+        <Setter Property="BorderColor" Value="{StaticResource AccentColor}"/>
+        <Setter Property="HeightRequest" Value="725"/>
+        <Setter Property="Padding" Value="2"/>
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource PrimaryBackgroundColor}"/>
+    </Style>
 </ResourceDictionary>

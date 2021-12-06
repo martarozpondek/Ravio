@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ravio.Entities
 {
@@ -15,6 +16,8 @@ namespace Ravio.Entities
         public TimeSpan Time { get; set; }
 
         public int Calories { get; set; }
+
+        public ICollection<CoordinatesEntity> Coordinates { get; set; }
 
         public double AverageSpeed { get; set; }
 

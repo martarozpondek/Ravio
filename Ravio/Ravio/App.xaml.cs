@@ -32,6 +32,9 @@ namespace Ravio
             DependencyService.Register<ExercisesResultsRepository>();
             DependencyService.Register<FoodResultsRepository>();
 
+            DependencyService.Register<WorkoutService>();
+            DependencyService.Register<ExerciseService>();
+
             DependencyService.Register<WorkoutsResultsService>();
             DependencyService.Register<ExercisesResultsService>();
             DependencyService.Register<FoodResultsService>();

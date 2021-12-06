@@ -19,6 +19,9 @@ namespace Ravio
             Routing.RegisterRoute(nameof(WorkoutPage), typeof(WorkoutPage));
             Routing.RegisterRoute(nameof(WorkoutResultPage), typeof(WorkoutResultPage));
 
+            Routing.RegisterRoute(nameof(ExercisePage), typeof(ExercisePage));
+            Routing.RegisterRoute(nameof(ExerciseResultPage), typeof(ExerciseResultPage));
+
             Routing.RegisterRoute(nameof(SearchFoodPage), typeof(SearchFoodPage));
         }
     }

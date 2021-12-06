@@ -1,4 +1,5 @@
 ﻿using Ravio.Entities;
+using Ravio.Services;
 using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -6,40 +7,25 @@ using Xamarin.Forms.Maps;
 
 namespace Ravio.ViewModels
 {
+    [QueryProperty(nameof(WorkoutResultId), "id")]
     public class WorkoutResultPageViewModel : BaseViewModel
     {
         public WorkoutResultPageViewModel()
         {
             Map = new Xamarin.Forms.Maps.Map();
 
-            //TestMap();
-            var startTime = new System.DateTime(2021, 07, 21, 14, 05, 00);
-            var endTime = new System.DateTime(2021, 07, 21, 15, 05, 00);
-            WorkoutResult = new WorkoutResultEntity() { Calories = 200, Distance = 20, StartTime = startTime, EndTime = endTime, Time = endTime - startTime};
-
             GoToHomePageCommand = new Command(GoToHomePage);
+
+            GetWorkoutResult();
         }
 
-        public async void TestMap()
+        private WorkoutsResultsService WorkoutsResultsService => DependencyService.Get<WorkoutsResultsService>();
+
+        private int workoutResultid;
+        public int WorkoutResultId
         {
-            Polyline Line = new Polyline() { StrokeColor = Color.Pink, StrokeWidth = 10 };
-
-            while (true)
-            {
-                var Location = await Geolocation.GetLocationAsync();
-
-                var PostionPoint = new Position(Location.Latitude, Location.Longitude);
-
-                Map.MoveToRegion(new MapSpan(PostionPoint, 0.01, 0.01));
-
-                Line.Geopath.Add(PostionPoint);
-               
-                Map.MapElements.Add(Line);
-
-                await System.Threading.Tasks.Task.Delay(5000);
-
-                Map.MapElements.Remove(Line);
-            }
+            get { return workoutResultid; }
+            set { SetProperty(ref workoutResultid, value); }
         }
 
         private Xamarin.Forms.Maps.Map map;
@@ -54,6 +40,11 @@ namespace Ravio.ViewModels
         {
             get { return workoutResult; }
             set { SetProperty(ref workoutResult, value); }
+        }
+
+        public async void GetWorkoutResult()
+        {
+            WorkoutResult = await WorkoutsResultsService.GetById(WorkoutResultId);
         }
 
         public Command GoToHomePageCommand { get; set; }

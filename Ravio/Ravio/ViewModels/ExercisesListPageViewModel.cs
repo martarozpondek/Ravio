@@ -10,9 +10,11 @@ namespace Ravio.ViewModels
         public ExercisesListPageViewModel()
         {
             Exercises = new List<ExerciseEntity>();
-            Exercises.Add(new ExerciseEntity() { Name = "Siema " });
-            Exercises.Add(new ExerciseEntity() { Name = "Elo " });
-            Exercises.Add(new ExerciseEntity() { Name = "Siemsasaa " });
+            Exercises.Add(new ExerciseEntity() { Name = "Przysiady " });
+            Exercises.Add(new ExerciseEntity() { Name = "Brzuszki" });
+            Exercises.Add(new ExerciseEntity() { Name = "Pompki " });
+
+            StartExerciseCommand = new Command<string>(StartExercise);
         }
 
         private ExercisesRepository ExercisesRepository => DependencyService.Get<ExercisesRepository>();
@@ -22,6 +24,12 @@ namespace Ravio.ViewModels
         {
             get { return exercises; }
             set { SetProperty(ref exercises, value); }
+        }
+
+        public Command<string> StartExerciseCommand { get; set; }
+        private async void StartExercise(string exerciseName)
+        {
+            await Shell.Current.GoToAsync($"ExercisePage?exerciseName={exerciseName}");
         }
     }
 }

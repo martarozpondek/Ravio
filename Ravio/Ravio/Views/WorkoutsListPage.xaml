@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ViewModels="clr-namespace:Ravio.ViewModels"
     x:Class="Ravio.Views.WorkoutsListPage"
+    x:Name="WorkoutsListContentPage"
     Title="WorkoutsList">
     <ContentPage.Resources>
         <ResourceDictionary Source="../ResourceDictionaries/WorkoutsListPageResourceDictionary.xaml"/>
@@ -13,7 +14,20 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <FlexLayout Direction="Column">
-            <CarouselView ItemsSource="{Binding Workouts}" ItemTemplate="{StaticResource WorkoutItemTemplate}" IndicatorView="indicatorView"/>
+            <CarouselView ItemsSource="{Binding Workouts}" IndicatorView="indicatorView">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <FlexLayout JustifyContent="Center" AlignItems="Center">
+                            <Frame>
+                                <StackLayout>
+                                <Label Text="{Binding Name}"/>
+                                <Button Text="Rozpocznij trening" Command="{Binding Path=BindingContext.StartWorkoutCommand, Source={x:Reference Name=WorkoutsListContentPage}}" CommandParameter="{Binding Name}" />
+                                </StackLayout>
+                            </Frame>
+                        </FlexLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
             <IndicatorView x:Name="indicatorView" IndicatorColor="{StaticResource SecondaryBackgroundColor}" SelectedIndicatorColor="{StaticResource AccentColor}" HeightRequest="50" IndicatorSize="11"/>
         </FlexLayout>
     </ContentPage.Content>

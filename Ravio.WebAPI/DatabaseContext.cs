@@ -33,6 +33,7 @@ namespace Ravio.WebAPI
 
         public virtual DbSet<WorkoutEntity> Workouts { get; set; }
         public virtual DbSet<WorkoutResultEntity> WorkoutsResults { get; set; }
+        public virtual DbSet<CoordinatesEntity> Coordinates { get; set; }
 
         public virtual DbSet<ExerciseEntity> Exercises { get; set; }
         public virtual DbSet<ExerciseResultEntity> ExercisesResults { get; set; }
