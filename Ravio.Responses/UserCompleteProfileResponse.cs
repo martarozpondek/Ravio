@@ -1,8 +1,8 @@
 ﻿namespace Ravio.Responses
 {
-    public class CompleteProfileResponse
+    public class UserCompleteProfileResponse
     {
-        public CompleteProfileResponse(bool isSucceeded, string error)
+        public UserCompleteProfileResponse(bool isSucceeded, string error)
         {
             IsSucceeded = isSucceeded;
             Error = error;

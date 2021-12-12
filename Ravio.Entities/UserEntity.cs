@@ -18,8 +18,8 @@ namespace Ravio.Entities
 
         public DateTime BirthDate { get; set; }
 
-        public int? SexTypeId { get; set; }
-        public virtual GenderType Sex { get; set; }
+        public int? GenderTypeId { get; set; }
+        public virtual GenderType Gender { get; set; }
 
         public int? LifestyleTypeId { get; set; }
         public virtual LifestyleType Lifestyle { get; set; }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Ravio.Entities;
+using Ravio.WebAPI.Managers;
 using Ravio.WebAPI.Repositories;
 using Ravio.WebAPI.Services;
 using System.Text;
@@ -37,6 +38,7 @@ namespace Ravio.WebAPI
             serviceCollection.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Ravio")));
 
             serviceCollection.AddIdentity<UserEntity, IdentityRole<int>>().AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
+            serviceCollection.AddScoped<IJwtBearerTokenManager, JwtBearerTokenManager>();
 
             serviceCollection.AddScoped<IWorkoutsRepository, WorkoutsRepository>();
             serviceCollection.AddScoped<IExercisesRepository, ExercisesRepository>();
@@ -51,11 +53,14 @@ namespace Ravio.WebAPI
             serviceCollection.AddScoped<IFoodResultsService, FoodResultsService>();
 
             serviceCollection.AddScoped<IBodiesMessurementsRepository, BodiesMessurementsRepository>();
+
             serviceCollection.AddScoped<IUsersService, UsersService>();
         }
 
-        public void Configure(IApplicationBuilder applicationBuilder)
+        public void Configure(IApplicationBuilder applicationBuilder, DatabaseContext databaseContext)
         {
+            databaseContext.Database.Migrate();
+
             applicationBuilder.UseHttpsRedirection();
 
             applicationBuilder.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Ravio.Entities;
 using Ravio.WebAPI.Repositories;
+using System.Threading.Tasks;
 
 namespace Ravio.WebAPI.Controllers
 {
@@ -13,5 +15,11 @@ namespace Ravio.WebAPI.Controllers
         }
 
         private INewsRepository NewsRepository { get; }
+
+        [HttpGet]
+        public async Task<ActionResult<NewsEntity>> GetNews()
+        {
+            return await NewsRepository.GetNews();
+        }
     }
 }

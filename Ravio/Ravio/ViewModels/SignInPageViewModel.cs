@@ -1,5 +1,6 @@
 ﻿using Ravio.Requests;
 using Ravio.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Ravio.ViewModels
@@ -14,7 +15,7 @@ namespace Ravio.ViewModels
             GoToSignUpPageCommand = new Command(GoToSignUpPage);
         }
 
-        private UserService UsersService => DependencyService.Get<UserService>();
+        private UserService UserService => DependencyService.Get<UserService>();
 
         private UserSignInRequest userSignInRequest;
         public UserSignInRequest UserSignInRequest
@@ -39,20 +40,18 @@ namespace Ravio.ViewModels
         public Command SignInCommand { get; set; }
         private async void SignIn()
         {
-            //var Response = await UsersService.SignInAsync(UserSignInRequest);
-            //if (Response.IsSucceeded)
-            //{
-            //    await SecureStorage.SetAsync("Token", Response.Token);
-            //    await Shell.Current.GoToAsync("///HomePage");
-            //}
-            //else
-            //{
-            //    Error = Response.Error;
-            //}
+            var Response = await UserService.SignInAsync(UserSignInRequest);
+            if (Response.IsSucceeded)
+            {
+                await SecureStorage.SetAsync("Token", Response.Token);
+                await Shell.Current.GoToAsync("///HomePage");
+            }
+            else
+            {
+                Error = Response.Error;
+            }
 
-            //UserSignInRequest.UserName = userSignInRequest.Password = string.Empty;
-
-            await Shell.Current.GoToAsync("///HomePage");
+            UserSignInRequest = new UserSignInRequest();
         }
     }
 }

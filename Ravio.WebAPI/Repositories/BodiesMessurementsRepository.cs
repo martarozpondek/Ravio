@@ -8,11 +8,11 @@ namespace Ravio.WebAPI.Repositories
 {
     public interface IBodiesMessurementsRepository
     {
-        Task<List<BodyMessurementsEntity>> GetBodyMessurements(int userId);
+        Task<List<BodyMessurementsEntity>> GetBodyMessurementsByUserName(string userName);
 
-        Task<BodyMessurementsEntity> GetLastBodyMessurement(int userId);
+        Task<BodyMessurementsEntity> GetLastBodyMessurementsByUserName(string userName);
 
-        Task PostBodyMessurement(BodyMessurementsEntity bodyMessurements);
+        Task PostBodyMessurementsByUserName(BodyMessurementsEntity bodyMessurements, string userName);
     }
 
     public class BodiesMessurementsRepository : IBodiesMessurementsRepository
@@ -24,17 +24,17 @@ namespace Ravio.WebAPI.Repositories
 
         private DatabaseContext DatabaseContext { get; }
 
-        public async Task<List<BodyMessurementsEntity>> GetBodyMessurements(int userId)
+        public async Task<List<BodyMessurementsEntity>> GetBodyMessurementsByUserName(string userName)
         {
-            return await DatabaseContext.BodiesMessurements.Where(bodyMessurement => bodyMessurement.UserId == userId).ToListAsync();
+            return await DatabaseContext.BodiesMessurements.Where(bodyMessurement => bodyMessurement.User.UserName == userName).ToListAsync();
         }
 
-        public async Task<BodyMessurementsEntity> GetLastBodyMessurement(int userId)
+        public async Task<BodyMessurementsEntity> GetLastBodyMessurementsByUserName(string userName)
         {
-            return await DatabaseContext.BodiesMessurements.LastAsync(bodyMessurement => bodyMessurement.UserId == userId);
+            return await DatabaseContext.BodiesMessurements.LastAsync(bodyMessurement => bodyMessurement.User.UserName == userName);
         }
 
-        public async Task PostBodyMessurement(BodyMessurementsEntity bodyMessurements)
+        public async Task PostBodyMessurementsByUserName(BodyMessurementsEntity bodyMessurements, string userName)
         {
             await DatabaseContext.BodiesMessurements.AddAsync(bodyMessurements);
             await DatabaseContext.SaveChangesAsync();

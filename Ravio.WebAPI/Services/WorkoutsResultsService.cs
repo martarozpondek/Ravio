@@ -1,10 +1,15 @@
-﻿using Ravio.WebAPI.Repositories;
+﻿using Ravio.Entities;
+using Ravio.WebAPI.Repositories;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ravio.WebAPI.Services
 {
     public interface IWorkoutsResultsService
     {
+        Task<List<WorkoutResultEntity>> GetWorkoutsResultsByUserName(string userName);
 
+        Task PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName);
     }
 
     public class WorkoutsResultsService : IWorkoutsResultsService
@@ -15,5 +20,15 @@ namespace Ravio.WebAPI.Services
         }
 
         private IWorkoutsResultsRepository WorkoutsResultsRepository { get; }
+
+        public async Task<List<WorkoutResultEntity>> GetWorkoutsResultsByUserName(string userName)
+        {
+            return await WorkoutsResultsRepository.GetWorkoutsResultsByUserName(userName);
+        }
+
+        public async Task PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName)
+        {
+            await WorkoutsResultsRepository.PostWorkoutResultByUserName(workoutResult, userName);
+        }
     }
 }

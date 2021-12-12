@@ -4,6 +4,7 @@ using System;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Ravio
@@ -40,6 +41,14 @@ namespace Ravio
             DependencyService.Register<FoodResultsService>();
 
             MainPage = new AppShell();
+        }
+
+        protected override async void OnStart()
+        {
+            if (await SecureStorage.GetAsync("Token") == null)
+            {
+                await Shell.Current.GoToAsync("///HomePage");
+            }
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Ravio.Entities
 
         public int Level { get; set; }
 
+        public bool IsEnabled { get; set; }
+
         public int? UserId { get; set; }
         public virtual UserEntity User { get; set; }
     }

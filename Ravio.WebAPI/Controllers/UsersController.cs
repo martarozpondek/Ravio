@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Ravio.Requests;
 using Ravio.Responses;
 using Ravio.WebAPI.Services;
@@ -20,19 +22,37 @@ namespace Ravio.WebAPI.Controllers
         [HttpPost("SignIn")]
         public async Task<ActionResult<UserSignInResponse>> SignInAsync(UserSignInRequest request)
         {
-            return Ok();
+            var response = await UsersService.SignInAsync(request);
+
+            if (response.IsSucceeded) return Ok(response);
+            else return BadRequest(response);
         }
 
         [HttpPost("SignUp")]
         public async Task<ActionResult<UserSignUpResponse>> SignUpAsync(UserSignUpRequest request)
         {
-            return Ok();
+            var response = await UsersService.SignUpAsync(request);
+
+            if (response.IsSucceeded) return Ok(response);
+            else return BadRequest(response);
+        }
+
+        [HttpPost("CompleteProfile")]
+        public async Task<ActionResult<UserCompleteProfileResponse>> CompleteProfile(UserCompleteProfileRequest request)
+        {
+            var response = await UsersService.CompleteProfileAsync(request);
+
+            if (response.IsSucceeded) return Ok(response);
+            else return BadRequest(response);
         }
 
         [HttpPost("SignDown")]
         public async Task<ActionResult<UserSignInResponse>> SignDownAsync()
         {
-            return Ok();
+            var response = await UsersService.SignDownAsync(new UserSignDownRequest(User.Identity.Name));
+
+            if (response.IsSucceeded) return Ok(response);
+            else return BadRequest(response);
         }
     }
 }

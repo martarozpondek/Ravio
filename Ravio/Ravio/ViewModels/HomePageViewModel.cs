@@ -14,5 +14,11 @@ namespace Ravio.ViewModels
         {
             await Shell.Current.GoToAsync(componentName);
         }
+
+        public Command<string> DisplayTokenCommand { get; set; }
+        private async void DisplayToken()
+        {
+            await Shell.Current.DisplayAlert("Token", await Xamarin.Essentials.SecureStorage.GetAsync("Token"), "Ok");
+        }
     }
 }
