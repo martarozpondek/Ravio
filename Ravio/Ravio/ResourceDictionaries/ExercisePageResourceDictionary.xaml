@@ -2,5 +2,26 @@
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    
+    <Style TargetType="Frame">
+        <Setter Property="BorderColor" Value="{StaticResource AccentColor}" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="WidthRequest" Value="200" />
+        <Setter Property="HeightRequest" Value="250"/>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="FontSize" Value="Large" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryForegroundColor}" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryBackgroundColor}" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Margin" Value="1 20 1 20" />
+        <Setter Property="WidthRequest" Value="190"/>
+    </Style>
 </ResourceDictionary>

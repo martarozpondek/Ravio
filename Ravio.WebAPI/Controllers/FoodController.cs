@@ -28,5 +28,11 @@ namespace Ravio.WebAPI.Controllers
         {
             return await FoodRepository.GetFood(id);
         }
+
+        [HttpGet("Search/{searchString}")]
+        public async Task<FoodEntity> SearchFood(string searchString)
+        {
+            return await FoodRepository.SearchFood(searchString);
+        }
     }
 }

@@ -1,4 +1,8 @@
 ﻿using Ravio.Entities;
+using Ravio.Repositories;
+using Ravio.Services;
+using System;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
 namespace Ravio.ViewModels
@@ -11,6 +15,12 @@ namespace Ravio.ViewModels
 
         }
 
+        private FoodResultsService FoodResultsService => DependencyService.Get<FoodResultsService>();
+
+        private FoodRepository FoodRepository => DependencyService.Get<FoodRepository>();
+
+        private AddedFoodRepository AddedFoodRepository => DependencyService.Get<AddedFoodRepository>();
+
         private string searchString;
         public string SearchString
         {
@@ -18,11 +28,11 @@ namespace Ravio.ViewModels
             set { SetProperty(ref searchString, value); }
         }
 
-        private FoodEntity food;
-        public FoodEntity Food
+        private FoodEntity searchedfood;
+        public FoodEntity SearchedFood
         {
-            get { return food; }
-            set { SetProperty(ref food, value); }
+            get { return searchedfood; }
+            set { SetProperty(ref searchedfood, value); }
         }
 
         private string foodTypeName;
@@ -30,6 +40,18 @@ namespace Ravio.ViewModels
         {
             get { return foodTypeName; }
             set { SetProperty(ref foodTypeName, value); }
+        }
+
+        public Command SearchFoodCommand { get; set; }
+        private async void SearchFood()
+        {
+            SearchedFood = await FoodRepository.SearchFood(searchString);
+        }
+
+        public Command AddFoodCommand { get; set; }
+        private async void AddFood()
+        {
+            await AddedFoodRepository.AddFood(new AddedFoodEntity() { Name = SearchedFood.Name, Calories = SearchedFood.Calories, Grams = SearchedFood.Grams, Type = (FoodType)Enum.Parse(typeof(FoodType), FoodTypeName, true) });
         }
     }
 }

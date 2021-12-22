@@ -2,6 +2,7 @@
 using Ravio.Repositories;
 using Ravio.Requests;
 using Ravio.Services;
+using System;
 using System.Collections.Generic;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -48,6 +49,9 @@ namespace Ravio.ViewModels
             var Response = await UserService.SignUpAsync(UserSignUpRequest);
             if (Response.IsSucceeded)
             {
+                await SecureStorage.SetAsync("UserName", UserSignUpRequest.UserName);
+                await SecureStorage.SetAsync("Age", Convert.ToString(Response.Age));
+                await SecureStorage.SetAsync("Gender", Response.Gender.Name);
                 await SecureStorage.SetAsync("Token", Response.Token);
                 await Shell.Current.GoToAsync("///WelcomePage");
             }

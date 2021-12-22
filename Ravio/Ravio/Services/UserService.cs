@@ -1,4 +1,5 @@
-﻿using Ravio.Requests;
+﻿using Ravio.Entities;
+using Ravio.Requests;
 using Ravio.Responses;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -28,6 +29,13 @@ namespace Ravio.Services
             return await response.Content.ReadFromJsonAsync<UserSignUpResponse>(JsonSerializerOptions);
         }
 
+        public async Task<UserCompleteProfileResponse> CompleteProfileAsync(UserCompleteProfileRequest request)
+        {
+            var response = await HttpClient.PostAsJsonAsync("/Users/CompleteProfile", request, JsonSerializerOptions);
+
+            return await response.Content.ReadFromJsonAsync<UserCompleteProfileResponse>(JsonSerializerOptions);
+        }
+
         public async Task SignOutAsync()
         {
             SecureStorage.RemoveAll();
@@ -35,11 +43,16 @@ namespace Ravio.Services
             await Shell.Current.GoToAsync("///StartPage");
         }
 
-        public async Task<UserSignDownResponse> SignDownAsync(UserSignDownRequest request)
+        public async Task<UserSignDownResponse> SignDownAsync()
         {
-            var response = await HttpClient.PostAsJsonAsync("/Users/SignDown", request, JsonSerializerOptions);
+            var response = await HttpClient.PostAsJsonAsync("/Users/SignDown", JsonSerializerOptions);
 
             return await response.Content.ReadFromJsonAsync<UserSignDownResponse>(JsonSerializerOptions);
+        }
+
+        public async Task<UserEntity> GetUserByUserName()
+        {
+            return await HttpClient.GetFromJsonAsync<UserEntity>("/Users", JsonSerializerOptions);
         }
     }
 }

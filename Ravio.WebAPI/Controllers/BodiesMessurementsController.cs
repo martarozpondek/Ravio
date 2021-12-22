@@ -29,7 +29,8 @@ namespace Ravio.WebAPI.Controllers
         {
             return await BodiesMessurementsService.GetBodyMessurementsByUserName(User.Identity.Name);
         }
-        [HttpGet]
+
+        [HttpGet("Last")]
         public async Task<BodyMessurementsEntity> GetLastBodyMessurementsByUserName()
         {
             return await BodiesMessurementsService.GetLastBodyMessurementsByUserName(User.Identity.Name);

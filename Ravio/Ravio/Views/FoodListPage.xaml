@@ -49,6 +49,16 @@
                 <StackLayout  Orientation="Vertical">
                     <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" BindableLayout.ItemsSource="{Binding SnacksList}" BindableLayout.ItemTemplate="{StaticResource MealsListItemTemplate}"/>
                 </StackLayout>
+                <StackLayout>
+                    <Label>
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0}/{1}">
+                                <Binding Path="FoodResult.Calories" />
+                                <Binding Path="FoodResult.TargetCalories" />
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </StackLayout>
             </FlexLayout>
         </ScrollView>
     </ContentPage.Content>

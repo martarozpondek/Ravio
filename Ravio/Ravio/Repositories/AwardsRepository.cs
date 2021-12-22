@@ -27,5 +27,25 @@ namespace Ravio.Repositories
         {
             return await HttpClient.GetFromJsonAsync<List<AwardEntity>>("/Awards/Food", JsonSerializerOptions);
         }
+
+        public async Task PostAward(AwardEntity award)
+        {
+            await HttpClient.PostAsJsonAsync("/Awards", award, JsonSerializerOptions);
+        }
+
+        public async Task CheckWorkoutsAward()
+        {
+            await HttpClient.PutAsJsonAsync("/Awards/Workouts", JsonSerializerOptions);
+        }
+
+        public async Task CheckExercisesAward()
+        {
+            await HttpClient.PutAsJsonAsync("/Awards/Exercises", JsonSerializerOptions);
+        }
+
+        public async Task CheckFoodAward()
+        {
+            await HttpClient.PutAsJsonAsync("/Awards/Food", JsonSerializerOptions);
+        }
     }
 }

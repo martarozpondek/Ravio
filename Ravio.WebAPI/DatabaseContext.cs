@@ -40,6 +40,7 @@ namespace Ravio.WebAPI
 
         public virtual DbSet<FoodEntity> Food { get; set; }
         public virtual DbSet<FoodResultEntity> FoodResults { get; set; }
+        public virtual DbSet<AddedFoodEntity> AddedFood { get; set; }
 
         public virtual DbSet<AwardEntity> Awards { get; set; }
 
@@ -48,6 +49,16 @@ namespace Ravio.WebAPI
             base.OnConfiguring(optionsBuilder);
 
             optionsBuilder.UseSqlServer(Configuration.GetConnectionString("Ravio"));
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<UserEntity>().Ignore(entity => entity.Age);
+            builder.Entity<UserEntity>().Ignore(entity => entity.BMI);
+
+            builder.Entity<FoodResultEntity>().Ignore(entity => entity.Calories);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Ravio.Entities;
 using Ravio.Services;
-using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -15,8 +14,6 @@ namespace Ravio.ViewModels
             Map = new Xamarin.Forms.Maps.Map();
 
             GoToHomePageCommand = new Command(GoToHomePage);
-
-            GetWorkoutResult();
         }
 
         private WorkoutsResultsService WorkoutsResultsService => DependencyService.Get<WorkoutsResultsService>();
@@ -25,7 +22,7 @@ namespace Ravio.ViewModels
         public int WorkoutResultId
         {
             get { return workoutResultid; }
-            set { SetProperty(ref workoutResultid, value); }
+            set { SetProperty(ref workoutResultid, value); GetWorkoutResult(); CreateMapLine(); }
         }
 
         private Xamarin.Forms.Maps.Map map;
@@ -42,6 +39,18 @@ namespace Ravio.ViewModels
             set { SetProperty(ref workoutResult, value); }
         }
 
+        public async void CreateMapLine()
+        {
+            Polyline Line = new Polyline() { StrokeColor = Color.Purple, StrokeWidth = 10 };
+            foreach (var coordinates in WorkoutResult.Coordinates)
+            {
+                var position = new Position(coordinates.Latitude, coordinates.Longitude);
+                Line.Geopath.Add(position);
+            }
+
+            Map.MapElements.Add(Line);
+        }
+
         public async void GetWorkoutResult()
         {
             WorkoutResult = await WorkoutsResultsService.GetById(WorkoutResultId);
@@ -50,7 +59,7 @@ namespace Ravio.ViewModels
         public Command GoToHomePageCommand { get; set; }
         private async void GoToHomePage()
         {
-            await Shell.Current.GoToAsync("../../");
+            await Shell.Current.GoToAsync("///HomePage");
         }
     }
 }

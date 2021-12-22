@@ -1,8 +1,8 @@
 ﻿using Ravio.Entities;
 using Ravio.Repositories;
 using Ravio.Services;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Ravio.ViewModels
@@ -11,16 +11,22 @@ namespace Ravio.ViewModels
     {
         public ExercisesStatisticsPageViewModel()
         {
-
-            Awards = new ObservableCollection<AwardEntity>();
-            ExercisesResults = new ObservableCollection<ExerciseResultEntity>();
-            Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });
-            Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });
-            ExercisesResults.Add(new ExerciseResultEntity() { NumberOfRepetitions =20, Calories=5, Time= new System.TimeSpan(0,1,0) });
+            GetExerciseResults();
+            GetExerciseAwards();
         }
 
         private ExercisesResultsService ExercisesResultsService => DependencyService.Get<ExercisesResultsService>();
-        private AwardsRepository AwardsRepository => DependencyService.Get<AwardsRepository>();
+        private AwardsService AwardsService => DependencyService.Get<AwardsService>();
+
+        public async Task GetExerciseResults()
+        {
+            ExercisesResults = new ObservableCollection<ExerciseResultEntity>(await ExercisesResultsService.GetByUserName());
+        }
+
+        public async Task GetExerciseAwards()
+        {
+            Awards = new ObservableCollection<AwardEntity>(await AwardsService.GetExercisesAwardsByUserName());
+        }
 
         private ObservableCollection<ExerciseResultEntity> exercisesResults;
         public ObservableCollection<ExerciseResultEntity> ExercisesResults

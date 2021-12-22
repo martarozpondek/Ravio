@@ -13,10 +13,11 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <FlexLayout Direction="Column">
-            <SearchBar Text="{Binding SearchString}"/>
-            <Label Text="{Binding Food.Name}"/>
-            <Label Text="{Binding Food.Calories, StringFormat='{0} kcal'}"/>
-            <Label Text="{Binding Food.Grams, StringFormat='{0} g'}"/>
+            <SearchBar Text="{Binding SearchString}" SearchCommand="{Binding SearchFoodCommand}"/>
+            <Label Text="{Binding SearchedFood.Name}"/>
+            <Label Text="{Binding SearchedFood.Calories, StringFormat='{0} kcal'}"/>
+            <Label Text="{Binding SearchedFood.Grams, StringFormat='{0} g'}"/>
+            <Button Text="Dodaj" Command="{Binding AddFoodCommand}"/>
         </FlexLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -22,6 +22,12 @@ namespace Ravio.WebAPI.Services
         Task LevelUpWorkoutAward(string userName);
 
         Task LevelUpFoodAward(string userName);
+
+        Task CloseExerciseAward(string userName);
+
+        Task CloseWorkoutAward(string userName);
+
+        Task CloseFoodAward(string userName);
     }
 
     public class AwardsService : IAwardsService
@@ -74,6 +80,30 @@ namespace Ravio.WebAPI.Services
             var awards = await AwardsRepository.GetFoodAwardsByUserName(userName);
             var award = awards.FirstOrDefault(award => award.IsEnabled == true);
             award.Level++;
+            await AwardsRepository.PutAward(award);
+        }
+
+        public async Task CloseWorkoutAward(string userName)
+        {
+            var awards = await AwardsRepository.GetWorkoutsAwardsByUserName(userName);
+            var award = awards.FirstOrDefault(award => award.IsEnabled == true);
+            award.IsEnabled = false;
+            await AwardsRepository.PutAward(award);
+        }
+
+        public async Task CloseExerciseAward(string userName)
+        {
+            var awards = await AwardsRepository.GetExercisesAwardsByUserName(userName);
+            var award = awards.FirstOrDefault(award => award.IsEnabled == true);
+            award.IsEnabled = false;
+            await AwardsRepository.PutAward(award);
+        }
+
+        public async Task CloseFoodAward(string userName)
+        {
+            var awards = await AwardsRepository.GetFoodAwardsByUserName(userName);
+            var award = awards.FirstOrDefault(award => award.IsEnabled == true);
+            award.IsEnabled =  false;
             await AwardsRepository.PutAward(award);
         }
     }

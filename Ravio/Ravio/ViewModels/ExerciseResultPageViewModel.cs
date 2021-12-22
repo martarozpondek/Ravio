@@ -10,8 +10,6 @@ namespace Ravio.ViewModels
         public ExerciseResultPageViewModel()
         {
             GoToHomePageCommand = new Command(GoToHomePage);
-
-            GetExerciseResult();
         }
 
         private ExercisesResultsService ExercisesResultsService => DependencyService.Get<ExercisesResultsService>();
@@ -20,7 +18,7 @@ namespace Ravio.ViewModels
         public int ExerciseResultId
         {
             get { return exerciseResultid; }
-            set { SetProperty(ref exerciseResultid, value); }
+            set { SetProperty(ref exerciseResultid, value); GetExerciseResult(); }
         }
 
         private ExerciseResultEntity exerciseResult;
@@ -38,7 +36,7 @@ namespace Ravio.ViewModels
         public Command GoToHomePageCommand { get; set; }
         private async void GoToHomePage()
         {
-            await Shell.Current.GoToAsync("../../");
+            await Shell.Current.GoToAsync("///HomePage");
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Ravio.Entities;
 using Ravio.Repositories;
 using Ravio.Services;
+using System;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Ravio.ViewModels
@@ -11,9 +13,10 @@ namespace Ravio.ViewModels
     {
         public ExercisePageViewModel()
         {
-            GetExercise();
-
+            BeginExerciseCommand = new Command(BeginExercise);
             FinishExerciseCommand = new Command(FinishExercise);
+
+            ExerciseResult = new ExerciseResultEntity();
         }
 
         private ExercisesResultsService ExercisesResultsService => DependencyService.Get<ExercisesResultsService>();
@@ -22,15 +25,32 @@ namespace Ravio.ViewModels
 
         public async Task GetExercise()
         {
-            ExerciseEntity = await ExercisesRepository.GetByName(ExerciseName);
+            Exercise = await ExercisesRepository.GetByName(ExerciseName);
         }
 
         private async Task StartExercise()
         {
+            GetExercise();
 
+            IsExerciseMode = true;
+
+            ExerciseResult.StartTime = DateTime.Now;
+
+            await TextToSpeech.SpeakAsync($"Rozpocznij {Exercise.Name}");
+
+            while (IsExerciseMode)
+            {
+                Timer += TimeSpan.FromSeconds(1);
+                await Task.Delay(1000);
+            }
         }
 
-        private bool IsExerciseMode { get; set; } = false;
+        private bool isExerciseMode;
+        public bool IsExerciseMode
+        {
+            get { return isExerciseMode; }
+            set { SetProperty(ref isExerciseMode, value); }
+        }
 
         private string exerciseName;
         public string ExerciseName
@@ -39,11 +59,11 @@ namespace Ravio.ViewModels
             set { SetProperty(ref exerciseName, value); }
         }
 
-        private ExerciseEntity exerciseEntity;
-        public ExerciseEntity ExerciseEntity
+        private ExerciseEntity exercise;
+        public ExerciseEntity Exercise
         {
-            get { return exerciseEntity; }
-            set { SetProperty(ref exerciseEntity, value); }
+            get { return exercise; }
+            set { SetProperty(ref exercise, value); }
         }
 
         private ExerciseResultEntity exerciseResult;
@@ -53,12 +73,32 @@ namespace Ravio.ViewModels
             set { SetProperty(ref exerciseResult, value); }
         }
 
+        private TimeSpan timer;
+        public TimeSpan Timer
+        {
+            get { return timer; }
+            set { SetProperty(ref timer, value); }
+        }
+
+        public Command BeginExerciseCommand { get; set; }
+        private async void BeginExercise()
+        {
+            await StartExercise();
+        }
+
         public Command FinishExerciseCommand { get; set; }
         private async void FinishExercise()
         {
-            var result = await ExerciseService.FinishExercise(ExerciseResult);
-
             IsExerciseMode = false;
+
+            ExerciseResult.EndTime = DateTime.Now;
+            ExerciseResult.Time = ExerciseResult.EndTime - ExerciseResult.StartTime;
+
+            ExerciseResult.NumberOfRepetitions = Convert.ToInt32(await Shell.Current.DisplayPromptAsync("Liczba powtórzeń", "Wpisz liczbę powtórzeń"));
+
+            ExerciseResult.Calories = ExerciseResult.NumberOfRepetitions * Exercise.BurningParameter;
+
+            var result = await ExerciseService.FinishExercise(ExerciseResult);
 
             await Shell.Current.GoToAsync($"ExerciseResultPage?{result.Id}");
         }

@@ -47,34 +47,55 @@ namespace Ravio.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task PostAwardByUserName()
+        public async Task PostAwardByUserName(AwardEntity award)
         {
-
+            await AwardsService.PostAwardByUserName(award, User.Identity.Name);
         }
 
-        [HttpPut("Workout")]
-        public async Task PutWorkoutAwardByUserName()
+
+        [HttpPut("Workouts")]
+        public async Task PutWorkout()
         {
-            // Kopiuj + wklej
+            var workoutsResults = await WorkoutsResultsService.GetWorkoutsResultsByUserName(User.Identity.Name);
+
+            var daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month - 1);
+            var resultsFromLastMonth = workoutsResults.Where(result => result.StartTime < result.StartTime.AddMonths(-1) && result.StartTime > result.StartTime.AddDays(-1)).ToList();
+            if (resultsFromLastMonth.Count == daysInMonth)
+            {
+                await AwardsService.LevelUpWorkoutAward(User.Identity.Name);
+            }
+
+            else await AwardsService.CloseWorkoutAward(User.Identity.Name);
         }
 
-        [HttpPut("Exercise")]
-        public async Task PutExerciseAwardByUserName()
+        [HttpPut("Exercises")]
+        public async Task PutExercise()
         {
-            // Kopiuj + wklej
+            var exercisesResults = await ExercisesResultsService.GetExercisesResultsByUserName(User.Identity.Name);
+
+            var daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month - 1);
+            var resultsFromLastMonth = exercisesResults.Where(result => result.StartTime.Value < result.StartTime.Value.AddMonths(-1) && result.StartTime.Value > result.StartTime.Value.AddDays(-1)).ToList();
+            if (resultsFromLastMonth.Count == daysInMonth)
+            {
+                await AwardsService.LevelUpFoodAward(User.Identity.Name);
+            }
+
+            else await AwardsService.CloseExerciseAward(User.Identity.Name);
         }
 
         [HttpPut("Food")]
-        public async Task PutFoodAwardByUserName()
+        public async Task PutFood()
         {
             var foodResults = await FoodResultsService.GetFoodResultsByUserName(User.Identity.Name);
 
             var daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month - 1);
             var resultsFromLastMonth = foodResults.Where(foodResult => foodResult.Date < foodResult.Date.AddMonths(-1) && foodResult.Date > foodResult.Date.AddDays(-1)).ToList();
-            if (resultsFromLastMonth.Count == daysInMonth)
+            if (resultsFromLastMonth.All(result => result.Calories == result.TargetCalories))
             {
                 await AwardsService.LevelUpFoodAward(User.Identity.Name);
             }
+
+            else await AwardsService.CloseFoodAward(User.Identity.Name);
         }
     }
 }

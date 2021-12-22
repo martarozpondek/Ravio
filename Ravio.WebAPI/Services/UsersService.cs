@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Ravio.Entities;
 using Ravio.Requests;
 using Ravio.Responses;
 using Ravio.WebAPI.Managers;
 using Ravio.WebAPI.Repositories;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,9 +17,11 @@ namespace Ravio.WebAPI.Services
 
         Task<UserSignUpResponse> SignUpAsync(UserSignUpRequest request);
 
-        Task<UserCompleteProfileResponse> CompleteProfileAsync(UserCompleteProfileRequest request);
+        Task<UserCompleteProfileResponse> CompleteProfileAsync(UserCompleteProfileRequest request, string userName);
 
         Task<UserSignDownResponse> SignDownAsync(UserSignDownRequest request);
+
+        Task<UserEntity> GetUserByUserName(string userName);
     }
 
     public class UsersService : IUsersService
@@ -57,7 +61,7 @@ namespace Ravio.WebAPI.Services
             if (result.Succeeded)
             {
                 var user = await UserManager.FindByNameAsync(request.UserName);
-                return new UserSignUpResponse(true, "", JwtBearerTokenManager.Encode(user.Id, user.UserName, user.Email));
+                return new UserSignUpResponse(true, "", JwtBearerTokenManager.Encode(user.Id, user.UserName, user.Email), user.Age, user.Gender, user.Lifestyle);
             }
             else
             {
@@ -65,16 +69,17 @@ namespace Ravio.WebAPI.Services
             }
         }
 
-        public async Task<UserCompleteProfileResponse> CompleteProfileAsync(UserCompleteProfileRequest request)
+        public async Task<UserCompleteProfileResponse> CompleteProfileAsync(UserCompleteProfileRequest request, string userName)
         {
-            var user = await DatabaseContext.Accounts.FindAsync(request.UserId);
+            var user = await DatabaseContext.Accounts.FirstOrDefaultAsync(user => user.UserName == userName);
             if (user == null) return new UserCompleteProfileResponse(false, "User not found");
             user.Lifestyle = request.Lifestyle;
             user.Target = request.Target;
 
-            await BodiesMessurementsRepository.PostBodyMessurement(request.BodyMessurements);
 
-            return new UserCompleteProfileResponse(true, "");
+            await BodiesMessurementsRepository.PostBodyMessurements(new BodyMessurementsEntity() { User = user, Date = DateTime.Now, Weight = request.Weight, Height = request.Height, WaistMessurement = request.WaistMessurement, ChestMessurement = request.ChestMessurement, HipsMessurement = request.HipsMessurement, StomachMessurement = request.StomachMessurement, ThighMessurement = request.ThighMessurement });
+
+            return new UserCompleteProfileResponse(true, "", user.Target);
         }
 
         public async Task<UserSignDownResponse> SignDownAsync(UserSignDownRequest request)
@@ -86,6 +91,11 @@ namespace Ravio.WebAPI.Services
                 return new UserSignDownResponse(true);
             }
             else return new UserSignDownResponse(false, result.Errors.ToList()[0].Description);
+        }
+
+        public async Task<UserEntity> GetUserByUserName(string userName)
+        {
+            return await UserManager.FindByNameAsync(userName);
         }
     }
 }

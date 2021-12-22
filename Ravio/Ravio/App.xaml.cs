@@ -20,6 +20,8 @@ namespace Ravio
 
             DependencyService.Register<UserService>();
             DependencyService.Register<GendersRepository>();
+            DependencyService.Register<LifestyleTypesRepository>();
+            DependencyService.Register<TargetTypesRepository>();
             DependencyService.Register<BodiesMessurementsRepository>();
             DependencyService.Register<AwardsRepository>();
 
@@ -28,6 +30,7 @@ namespace Ravio
             DependencyService.Register<WorkoutsRepository>();
             DependencyService.Register<ExercisesRepository>();
             DependencyService.Register<FoodRepository>();
+            DependencyService.Register<AddedFoodRepository>();
 
             DependencyService.Register<WorkoutsResultsRepository>();
             DependencyService.Register<ExercisesResultsRepository>();
@@ -45,10 +48,12 @@ namespace Ravio
 
         protected override async void OnStart()
         {
-            if (await SecureStorage.GetAsync("Token") == null)
-            {
-                await Shell.Current.GoToAsync("///HomePage");
-            }
+            //if (await SecureStorage.GetAsync("Token") == null)
+            //{
+            //    await Shell.Current.GoToAsync("///HomePage");
+            //}
+
+            await Shell.Current.GoToAsync("ExerciseResultPage?id=3");
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Ravio.WebAPI.Services
     {
         Task<List<FoodResultEntity>> GetFoodResultsByUserName(string userName);
 
+        Task<FoodResultEntity> GetCurrentFoodResult(string userName);
+
         Task PostFoodResultByUserName(FoodResultEntity foodResult, string userName);
     }
 
@@ -24,6 +26,11 @@ namespace Ravio.WebAPI.Services
         public async Task<List<FoodResultEntity>> GetFoodResultsByUserName(string userName)
         {
             return await FoodResultsRepository.GetFoodResultsByUserName(userName);
+        }
+
+        public async Task<FoodResultEntity> GetCurrentFoodResult(string userName)
+        {
+            return await FoodResultsRepository.GetCurrentFoodResult(userName);
         }
 
         public async Task PostFoodResultByUserName(FoodResultEntity foodResult, string userName)

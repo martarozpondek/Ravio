@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ravio.Entities
 {
@@ -9,18 +10,13 @@ namespace Ravio.Entities
 
         public DateTime Date { get; set; }
 
-        public int Calories { get; set; }
+        public int Calories { get { return AddedFood.Select(food => food.Calories).Sum(); } }
 
         public int TargetCalories { get; set; }
 
-        public virtual List<FoodEntity> Foods { get; set; }
+        public virtual List<AddedFoodEntity> AddedFood { get; set; }
 
         public int? UserId { get; set; }
         public virtual UserEntity User { get; set; }
-    }
-
-    public enum FoodType
-    {
-        Breakfast, Lunch, Dinner, Supper, Snacks
     }
 }

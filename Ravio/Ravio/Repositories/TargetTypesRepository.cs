@@ -8,14 +8,14 @@ using Xamarin.Forms;
 
 namespace Ravio.Repositories
 {
-    public class GendersRepository
+    public class TargetTypesRepository
     {
         private HttpClient HttpClient => DependencyService.Get<HttpClient>();
         private JsonSerializerOptions JsonSerializerOptions => DependencyService.Get<JsonSerializerOptions>();
 
-        public async Task<List<GenderType>> GetGenderTypes()
+        public async Task<List<TargetType>> GetTargetTypes()
         {
-            return await HttpClient.GetFromJsonAsync<List<GenderType>>("/GenderTypes", JsonSerializerOptions);
+            return await HttpClient.GetFromJsonAsync<List<TargetType>>("/TargetTypes", JsonSerializerOptions);
         }
     }
 }

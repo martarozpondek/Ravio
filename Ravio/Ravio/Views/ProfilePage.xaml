@@ -12,8 +12,57 @@
         <ViewModels:ProfilePageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <FlexLayout>
-            
-        </FlexLayout>
+        <ScrollView>
+            <FlexLayout Direction="Column" JustifyContent="SpaceBetween" AlignItems="Center">
+                <StackLayout>
+                    <Label Text="Nazwa użytkownika: "/>
+                    <Label Text="{Binding User.UserName}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Płeć " />
+                    <Label Text="{Binding User.Gender.Name}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Data urodzenia " />
+                    <Label Text="{Binding User.BirthDate.Date}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="BMI " />
+                    <Label Text="{Binding User.BMI}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Wzrost(cm): " />
+                    <Label Text="{Binding User.Height}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Waga(kg): " />
+                    <Label Text="{Binding User.Weight}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Talia(cm): " />
+                    <Label Text="{Binding BodyMessurements.WaistMessurement}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Klatka(cm): " />
+                    <Label Text="{Binding BodyMessurements.ChestMessurement}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Biodra(cm): " />
+                    <Label Text="{Binding BodyMessurements.HipsMessurement}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Brzuch(cm): " />
+                    <Label Text="{Binding BodyMessurements.StomachMessurement}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Udo(cm): " />
+                    <Label Text="{Binding BodyMessurements.ThighMessurement}" />
+                </StackLayout>
+                <StackLayout>
+                    <Button Text="Wyloguj sie" Command="{Binding SignOutCommand}" />
+                    <Button Text="Usuń konto" Command="{Binding SignDownCommand}" />
+                </StackLayout>
+            </FlexLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

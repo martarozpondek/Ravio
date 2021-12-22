@@ -18,6 +18,14 @@ namespace Ravio.Entities
 
         public DateTime BirthDate { get; set; }
 
+        public int Age { get { return DateTime.Now.Year - BirthDate.Year; }  }
+
+        public double Height { get; set; }
+
+        public double Weight { get; set; }
+
+        public double BMI { get { return Weight / (Height * Height); } }
+
         public int? GenderTypeId { get; set; }
         public virtual GenderType Gender { get; set; }
 
@@ -48,6 +56,8 @@ namespace Ravio.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public double Parameter { get; set; }
     }
 
     public class TargetType
@@ -55,5 +65,7 @@ namespace Ravio.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+
     }
 }

@@ -12,8 +12,50 @@
         <ViewModels:WelcomePageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <FlexLayout>
-            
-        </FlexLayout>
+        <ScrollView>
+            <FlexLayout Direction="Column" JustifyContent="SpaceBetween" AlignItems="Center" >
+                <Label Text="Witaj w Ravio! Pozwól nam się bliżej poznać i uzupełnij swój profil: " Style="{StaticResource WelcomPageTitle}"/>
+                <StackLayout>
+                    <Label Text="Wzrost(cm): " />
+                    <Entry Text="{Binding CompleteProfileRequest.Height}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Waga(kg): " />
+                    <Entry Text="{Binding CompleteProfileRequest.Weight}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Talia(cm): " />
+                    <Entry Text="{Binding CompleteProfileRequest.WaistMessurement}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Klatka(cm): " />
+                    <Entry Text="{Binding CompleteProfileRequest.ChestMessurement}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Biodra(cm): " />
+                    <Entry Text="{Binding CompleteProfileRequest.HipsMessurement}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Brzuch(cm): " />
+                    <Entry Text="{Binding CompleteProfileRequest.StomachMessurement}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Udo(cm): " />
+                    <Entry Text="{Binding CompleteProfileRequest.ThighMessurement}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Tryb życia: " />
+                    <Picker ItemsSource="{Binding LifestyleTypes}" SelectedItem="{Binding CompleteProfileRequest.Lifestyle}"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Cel: " />
+                    <Picker ItemsSource="{Binding TargetTypes}" SelectedItem="{Binding CompleteProfileRequest.Target}"/>
+                </StackLayout>
+
+                <Button Text="Uzupełnione!" Command="{Binding CompleteProfileCommand}"/>
+            </FlexLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

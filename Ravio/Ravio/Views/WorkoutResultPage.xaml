@@ -33,7 +33,7 @@
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Średnia prędkość:" Style="{StaticResource Title}"/>
-                        <Label Text="{Binding WorkoutResult.AverageSpeed, StringFormat='{0} km/h'}"/>
+                        <Label Text="{Binding WorkoutResult.AverageSpeed, StringFormat='{0} m/s'}"/>
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Czas startu:" Style="{StaticResource Title}"/>

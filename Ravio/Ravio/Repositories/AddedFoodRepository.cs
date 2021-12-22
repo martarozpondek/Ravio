@@ -1,5 +1,4 @@
 ﻿using Ravio.Entities;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -8,14 +7,14 @@ using Xamarin.Forms;
 
 namespace Ravio.Repositories
 {
-    public class GendersRepository
+    public class AddedFoodRepository
     {
         private HttpClient HttpClient => DependencyService.Get<HttpClient>();
         private JsonSerializerOptions JsonSerializerOptions => DependencyService.Get<JsonSerializerOptions>();
 
-        public async Task<List<GenderType>> GetGenderTypes()
+        public async Task AddFood(AddedFoodEntity food)
         {
-            return await HttpClient.GetFromJsonAsync<List<GenderType>>("/GenderTypes", JsonSerializerOptions);
+            await HttpClient.PostAsJsonAsync("/AddedFood", food, JsonSerializerOptions);
         }
     }
 }

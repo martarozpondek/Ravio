@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Ravio.Entities;
 using Ravio.Requests;
 using Ravio.Responses;
 using Ravio.WebAPI.Services;
@@ -40,7 +41,7 @@ namespace Ravio.WebAPI.Controllers
         [HttpPost("CompleteProfile")]
         public async Task<ActionResult<UserCompleteProfileResponse>> CompleteProfile(UserCompleteProfileRequest request)
         {
-            var response = await UsersService.CompleteProfileAsync(request);
+            var response = await UsersService.CompleteProfileAsync(request, User.Identity.Name);
 
             if (response.IsSucceeded) return Ok(response);
             else return BadRequest(response);
@@ -53,6 +54,12 @@ namespace Ravio.WebAPI.Controllers
 
             if (response.IsSucceeded) return Ok(response);
             else return BadRequest(response);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<UserEntity>> GetUserByUserName()
+        {
+            return await UsersService.GetUserByUserName(User.Identity.Name);
         }
     }
 }

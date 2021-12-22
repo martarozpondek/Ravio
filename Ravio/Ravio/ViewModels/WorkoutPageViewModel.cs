@@ -1,5 +1,9 @@
 ﻿using Ravio.Entities;
+using Ravio.Repositories;
 using Ravio.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -13,12 +17,22 @@ namespace Ravio.ViewModels
         {
             Map = new Xamarin.Forms.Maps.Map();
 
+            WorkoutResult = new WorkoutResultEntity();
+
             FinishWorkoutCommand = new Command(FinishWorkout);
         }
 
         private WorkoutService WorkoutService => DependencyService.Get<WorkoutService>();
         private WorkoutsResultsService WorkoutsResultsService => DependencyService.Get<WorkoutsResultsService>();
+        private WorkoutsRepository WorkoutsRepository => DependencyService.Get<WorkoutsRepository>();
 
+        private WorkoutEntity workout;
+        public WorkoutEntity Workout
+        {
+            get { return workout; }
+            set { SetProperty(ref workout, value); }
+        }
+        
         private string workoutName;
         public string WorkoutName
         {
@@ -40,13 +54,24 @@ namespace Ravio.ViewModels
             set { SetProperty(ref workoutResult, value); }
         }
 
+        public async Task GetWorkout()
+        {
+            Workout = await WorkoutsRepository.GetByName(WorkoutName);
+            WorkoutResult.Workout = Workout;
+        }
+
         private async Task StartWorkout()
         {
+            WorkoutResult.StartTime = DateTime.Now;
+
             Polyline Line = new Polyline() { StrokeColor = Color.Purple, StrokeWidth = 10 };
+
+            List<double> Speeds = new List<double>();
 
             while (IsWorkoutMode)
             {
                 var position = await WorkoutService.GetUserPosition();
+                Speeds.Add(await WorkoutService.GetUserSpeed());
 
                 WorkoutResult.Coordinates.Add(new CoordinatesEntity(position.Latitude, position.Latitude));
 
@@ -59,6 +84,8 @@ namespace Ravio.ViewModels
 
                 await Task.Delay(1000);
             }
+
+            WorkoutResult.AverageSpeed = Speeds.Average();
         }
 
         private bool IsWorkoutMode { get; set; } = false;
@@ -66,9 +93,14 @@ namespace Ravio.ViewModels
         public Command FinishWorkoutCommand { get; set; }
         private async void FinishWorkout()
         {
-            var result = await WorkoutService.FinishWorkout(workoutResult);
-
             IsWorkoutMode = false;
+
+            WorkoutResult.EndTime = DateTime.Now;
+            WorkoutResult.Time = WorkoutResult.StartTime - WorkoutResult.EndTime;
+
+            WorkoutResult.Distance = WorkoutService.CalculateDistanceBetweenPoints(WorkoutResult.Coordinates);
+
+            var result = await WorkoutService.FinishWorkout(workoutResult);
 
             await Shell.Current.GoToAsync($"WorkoutResultPage?{result.Id}");
         }

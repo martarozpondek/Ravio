@@ -12,8 +12,30 @@
         <ViewModels:ExerciseResultPageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <FlexLayout Direction="Column">
-            
-        </FlexLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="65"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <FlexLayout JustifyContent="SpaceAround" AlignItems="Center" Direction="Row" Wrap="Wrap">
+                    <StackLayout>
+                        <Label Text="Kalorie:" Style="{StaticResource Title}"/>
+                        <Label Text="{Binding ExerciseResult.Calories, StringFormat='{0} kcal'}"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Liczba powtórzeń:" Style="{StaticResource Title}"/>
+                        <Label Text="{Binding ExerciseResult.NumberOfRepetitions}"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Czas:" Style="{StaticResource Title}"/>
+                        <Label Text="{Binding ExerciseResult.Time, StringFormat='{0:HH\\:mm\\:ss}'}"/>
+                    </StackLayout>
+                </FlexLayout>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Button Text="Wyjście" Command="{Binding GoToHomePageCommand}" />
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

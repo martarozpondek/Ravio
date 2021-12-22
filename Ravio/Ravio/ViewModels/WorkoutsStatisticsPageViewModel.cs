@@ -1,8 +1,8 @@
 ﻿using Ravio.Entities;
 using Ravio.Repositories;
 using Ravio.Services;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Ravio.ViewModels
@@ -11,15 +11,22 @@ namespace Ravio.ViewModels
     {
         public WorkoutsStatisticsPageViewModel()
         {
-            Awards = new ObservableCollection<AwardEntity>();
-            WorkoutsResults = new ObservableCollection<WorkoutResultEntity>();
-            Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });
-            Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });
-            WorkoutsResults.Add(new WorkoutResultEntity() { Calories = 5, Distance = 25, StartTime = System.DateTime.Now, EndTime = System.DateTime.Now, Workout = new WorkoutEntity() { Name = "Rower" } });WorkoutsResults.Add(new WorkoutResultEntity() { Calories = 5, Distance = 25, StartTime = System.DateTime.Now, EndTime = System.DateTime.Now, Workout = new WorkoutEntity() { Name = "Rower" } });WorkoutsResults.Add(new WorkoutResultEntity() { Calories = 5, Distance = 25, StartTime = System.DateTime.Now, EndTime = System.DateTime.Now, Workout = new WorkoutEntity() { Name = "Rower" } });WorkoutsResults.Add(new WorkoutResultEntity() { Calories = 5, Distance = 25, StartTime = System.DateTime.Now, EndTime = System.DateTime.Now, Workout = new WorkoutEntity() { Name = "Rower" } });
+            GetWorkoutsResults();
+            GetWorkoutsAwards();
         }
 
         private WorkoutsResultsService WorkoutsResultsService => DependencyService.Get<WorkoutsResultsService>();
-        private AwardsRepository AwardsRepository => DependencyService.Get<AwardsRepository>();
+        private AwardsRepository AwardsService => DependencyService.Get<AwardsRepository>();
+
+        public async Task GetWorkoutsResults()
+        {
+            WorkoutsResults = new ObservableCollection<WorkoutResultEntity>(await WorkoutsResultsService.GetByUserName());
+        }
+
+        public async Task GetWorkoutsAwards()
+        {
+            Awards = new ObservableCollection<AwardEntity>(await AwardsService.GetAwardsForWorkouts());
+        }
 
         private ObservableCollection<WorkoutResultEntity> workoutsResults;
         public ObservableCollection<WorkoutResultEntity> WorkoutsResults

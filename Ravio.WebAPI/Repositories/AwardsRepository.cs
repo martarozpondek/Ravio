@@ -44,6 +44,21 @@ namespace Ravio.WebAPI.Repositories
             return await DatabaseContext.Awards.Where(award => award.User.UserName == userName && award.Type == AwardType.Food).ToListAsync();
         }
 
+        public async Task<AwardEntity> GetEnabledWorkoutAward(string userName)
+        {
+            return await DatabaseContext.Awards.FirstOrDefaultAsync(award => award.User.UserName == userName && award.Type == AwardType.Workouts && award.IsEnabled == true);
+        }
+
+        public async Task<AwardEntity> GetEnabledExerciseAward(string userName)
+        {
+            return await DatabaseContext.Awards.FirstOrDefaultAsync(award => award.User.UserName == userName && award.Type == AwardType.Exercises && award.IsEnabled == true);
+        }
+
+        public async Task<AwardEntity> GetEnabledFoodAward(string userName)
+        {
+            return await DatabaseContext.Awards.FirstOrDefaultAsync(award => award.User.UserName == userName && award.Type == AwardType.Food && award.IsEnabled == true);
+        }
+
         public async Task PostAwardByUserName(AwardEntity award, string userName)
         {
             award.User = await DatabaseContext.Accounts.FirstOrDefaultAsync(account => account.UserName == userName);

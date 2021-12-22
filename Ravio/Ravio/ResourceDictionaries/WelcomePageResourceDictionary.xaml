@@ -2,5 +2,45 @@
 <ResourceDictionary
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style TargetType="StackLayout">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
     
+    <Style TargetType="Label">
+        <Setter Property="Background" Value="{StaticResource SecondaryBackgroundColor}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="WidthRequest" Value="125" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="WelcomPageTitle">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="WidthRequest" Value="385" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
+    </Style>
+
+    <Style TargetType="RadioButton">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="WidthRequest" Value="100" />
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="WidthRequest" Value="75" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="Keyboard" Value="Numeric" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentColor}" />
+        <Setter Property="WidthRequest" Value="385" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryBackgroundColor}" />
+    </Style>
 </ResourceDictionary>

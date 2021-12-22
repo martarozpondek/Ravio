@@ -1,5 +1,7 @@
 ﻿using Ravio.Requests;
 using Ravio.Services;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -16,6 +18,8 @@ namespace Ravio.ViewModels
         }
 
         private UserService UserService => DependencyService.Get<UserService>();
+
+        private HttpClient HttpClient => DependencyService.Get<HttpClient>();
 
         private UserSignInRequest userSignInRequest;
         public UserSignInRequest UserSignInRequest
@@ -44,6 +48,7 @@ namespace Ravio.ViewModels
             if (Response.IsSucceeded)
             {
                 await SecureStorage.SetAsync("Token", Response.Token);
+                HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Response.Token);
                 await Shell.Current.GoToAsync("///HomePage");
             }
             else

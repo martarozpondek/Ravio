@@ -8,6 +8,7 @@ namespace Ravio.WebAPI.Repositories
 {
     public interface IWorkoutsResultsRepository
     {
+        Task<WorkoutResultEntity> GetWorkoutResultById(int id);
         Task<List<WorkoutResultEntity>> GetWorkoutsResultsByUserName(string userName);
         Task PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName);
     }
@@ -20,6 +21,11 @@ namespace Ravio.WebAPI.Repositories
         }
 
         private DatabaseContext DatabaseContext { get; }
+
+        public async Task<WorkoutResultEntity> GetWorkoutResultById(int id)
+        {
+            return await DatabaseContext.WorkoutsResults.FindAsync(id);
+        }
 
         public async Task<List<WorkoutResultEntity>> GetWorkoutsResultsByUserName(string userName)
         {

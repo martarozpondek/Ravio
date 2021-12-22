@@ -12,8 +12,21 @@
         <ViewModels:ExercisePageViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <FlexLayout Direction="Column">
-            <Label Text="{Binding ExerciseName}"/>
+        <FlexLayout JustifyContent="Center" AlignItems="Center">
+            <Frame>
+                <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
+                    <Label Text="{Binding ExerciseName}"/>
+                    <Label Text="{Binding Timer, StringFormat='{}{0:hh\\:mm:ss}'}"/>
+                    <Button Text="Rozpocznij ćwiczenie" Command="{Binding BeginExerciseCommand}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsExerciseMode}" Value="True">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Button Text="Zakończ" Command="{Binding FinishExerciseCommand}"/>
+                </FlexLayout>
+            </Frame>
         </FlexLayout>
     </ContentPage.Content>
 </ContentPage>

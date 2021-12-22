@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ravio.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ravio.WebAPI.Repositories
@@ -10,6 +11,8 @@ namespace Ravio.WebAPI.Repositories
         Task<List<FoodEntity>> GetFood();
 
         Task<FoodEntity> GetFood(int id);
+
+        Task<FoodEntity> SearchFood(string searchString);
     }
 
     public class FoodRepository : IFoodRepository
@@ -29,6 +32,11 @@ namespace Ravio.WebAPI.Repositories
         public async Task<FoodEntity> GetFood(int id)
         {
             return await DatabaseContext.Food.FindAsync(id);
+        }
+
+        public async Task<FoodEntity> SearchFood(string searchString)
+        {
+            return await DatabaseContext.Food.FirstOrDefaultAsync(food => food.Name.Contains(searchString));
         }
     }
 }

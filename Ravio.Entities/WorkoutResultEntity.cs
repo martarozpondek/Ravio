@@ -9,6 +9,8 @@ namespace Ravio.Entities
 
         public double Distance { get; set; }
 
+        public double AverageSpeed { get; set; }
+
         public DateTime StartTime { get; set; }
 
         public DateTime EndTime { get; set; }
@@ -18,8 +20,6 @@ namespace Ravio.Entities
         public int Calories { get; set; }
 
         public ICollection<CoordinatesEntity> Coordinates { get; set; }
-
-        public double AverageSpeed { get; set; }
 
         public int? WorkoutId { get; set; }
         public virtual WorkoutEntity Workout { get; set; }

@@ -1,8 +1,8 @@
 ﻿using Ravio.Entities;
 using Ravio.Repositories;
 using Ravio.Services;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Ravio.ViewModels
@@ -11,16 +11,22 @@ namespace Ravio.ViewModels
     {
         public FoodStatisticsPageViewModel()
         {
-
-            Awards = new ObservableCollection<AwardEntity>();
-            FoodResults = new ObservableCollection<FoodResultEntity>();
-            Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });
-            Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 }); Awards.Add(new AwardEntity() { Date = System.DateTime.Now, Level = 2 });
-            FoodResults.Add(new FoodResultEntity() {Calories = 1300, TargetCalories=1400, Date = System.DateTime.Now });
+            GetFoodResults();
+            GetFoodAwards();
         }
 
         private FoodResultsService FoodResultsService => DependencyService.Get<FoodResultsService>();
-        private AwardsRepository AwardsRepository => DependencyService.Get<AwardsRepository>();
+        private AwardsService AwardsService => DependencyService.Get<AwardsService>();
+
+        public async Task GetFoodResults()
+        {
+            FoodResults = new ObservableCollection<FoodResultEntity>(await FoodResultsService.GetByUserName());
+        }
+
+        public async Task GetFoodAwards()
+        {
+            Awards = new ObservableCollection<AwardEntity>(await AwardsService.GetFoodAwardsByUserName());
+        }
 
         private ObservableCollection<FoodResultEntity> foodResults;
         public ObservableCollection<FoodResultEntity> FoodResults

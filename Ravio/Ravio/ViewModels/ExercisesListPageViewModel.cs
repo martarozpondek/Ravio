@@ -1,6 +1,7 @@
 ﻿using Ravio.Entities;
 using Ravio.Repositories;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Ravio.ViewModels
@@ -9,15 +10,17 @@ namespace Ravio.ViewModels
     {
         public ExercisesListPageViewModel()
         {
-            Exercises = new List<ExerciseEntity>();
-            Exercises.Add(new ExerciseEntity() { Name = "Przysiady " });
-            Exercises.Add(new ExerciseEntity() { Name = "Brzuszki" });
-            Exercises.Add(new ExerciseEntity() { Name = "Pompki " });
-
             StartExerciseCommand = new Command<string>(StartExercise);
+
+            GetExercises();
         }
 
         private ExercisesRepository ExercisesRepository => DependencyService.Get<ExercisesRepository>();
+
+        public async Task GetExercises()
+        {
+            Exercises = await ExercisesRepository.GetAll();
+        }
 
         private List<ExerciseEntity> exercises;
         public List<ExerciseEntity> Exercises

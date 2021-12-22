@@ -20,6 +20,12 @@ namespace Ravio.WebAPI.Controllers
 
         private IWorkoutsResultsService WorkoutsResultsService { get; }
 
+        [HttpGet("{id}")]
+        public async Task<WorkoutResultEntity> GetWorkoutResultById(int id)
+        {
+            return await WorkoutsResultsService.GetWorkoutResultById(id);
+        }
+
         [HttpGet]
         public async Task<List<WorkoutResultEntity>> GetWorkoutResultsByUserName()
         {
