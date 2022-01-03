@@ -15,7 +15,7 @@ namespace Ravio.Repositories
 
         public async Task<List<TargetType>> GetTargetTypes()
         {
-            return await HttpClient.GetFromJsonAsync<List<TargetType>>("/TargetTypes", JsonSerializerOptions);
+            return await HttpClient.GetFromJsonAsync<List<TargetType>>("AccountDetailsTypes/Targets", JsonSerializerOptions);
         }
     }
 }

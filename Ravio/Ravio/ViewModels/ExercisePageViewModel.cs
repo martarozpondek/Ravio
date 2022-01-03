@@ -92,11 +92,8 @@ namespace Ravio.ViewModels
             IsExerciseMode = false;
 
             ExerciseResult.EndTime = DateTime.Now;
-            ExerciseResult.Time = ExerciseResult.EndTime - ExerciseResult.StartTime;
 
             ExerciseResult.NumberOfRepetitions = Convert.ToInt32(await Shell.Current.DisplayPromptAsync("Liczba powtórzeń", "Wpisz liczbę powtórzeń"));
-
-            ExerciseResult.Calories = ExerciseResult.NumberOfRepetitions * Exercise.BurningParameter;
 
             var result = await ExerciseService.FinishExercise(ExerciseResult);
 

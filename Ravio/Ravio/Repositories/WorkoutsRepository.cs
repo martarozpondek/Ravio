@@ -1,4 +1,5 @@
 ﻿using Ravio.Entities;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -11,6 +12,11 @@ namespace Ravio.Repositories
     {
         private HttpClient HttpClient => DependencyService.Get<HttpClient>();
         private JsonSerializerOptions JsonSerializerOptions => DependencyService.Get<JsonSerializerOptions>();
+
+        public async Task<List<WorkoutEntity>> GetAll()
+        {
+            return await HttpClient.GetFromJsonAsync<List<WorkoutEntity>>("/Workouts", JsonSerializerOptions);
+        }
 
         public async Task<WorkoutEntity> GetByName(string name)
         {

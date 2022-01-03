@@ -4,6 +4,10 @@ namespace Ravio.Responses
 {
     public class UserCompleteProfileResponse
     {
+        public UserCompleteProfileResponse()
+        {
+
+        }
         public UserCompleteProfileResponse(bool isSucceeded, string error)
         {
             IsSucceeded = isSucceeded;

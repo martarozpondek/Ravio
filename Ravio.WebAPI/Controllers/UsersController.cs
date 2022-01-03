@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Ravio.WebAPI.Controllers
 {
     [Route("[Controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -21,6 +22,7 @@ namespace Ravio.WebAPI.Controllers
         private IUsersService UsersService { get; }
 
         [HttpPost("SignIn")]
+        [AllowAnonymous]
         public async Task<ActionResult<UserSignInResponse>> SignInAsync(UserSignInRequest request)
         {
             var response = await UsersService.SignInAsync(request);
@@ -30,6 +32,7 @@ namespace Ravio.WebAPI.Controllers
         }
 
         [HttpPost("SignUp")]
+        [AllowAnonymous]
         public async Task<ActionResult<UserSignUpResponse>> SignUpAsync(UserSignUpRequest request)
         {
             var response = await UsersService.SignUpAsync(request);

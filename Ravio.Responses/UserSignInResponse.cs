@@ -2,6 +2,10 @@
 {
     public class UserSignInResponse
     {
+        public UserSignInResponse()
+        {
+
+        }
         public UserSignInResponse(bool isSucceeded, string error)
         {
             IsSucceeded = isSucceeded;

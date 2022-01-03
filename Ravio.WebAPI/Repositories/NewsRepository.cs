@@ -13,16 +13,9 @@ namespace Ravio.WebAPI.Repositories
 
     public class NewsRepository : INewsRepository
     {
-        private HttpClient HttpClient { get; }
-
-        public NewsRepository(HttpClient httpClient)
-        {
-            HttpClient = httpClient;
-        }
-
         public async Task<NewsEntity> GetNews()
         {
-            return await HttpClient.GetFromJsonAsync<NewsEntity>("https://newsapi.org/v2/top-headlines?country=pl&apiKey=66c23059de4f4dddb4560a8f135edc9d", new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            return await new HttpClient().GetFromJsonAsync<NewsEntity>("https://newsapi.org/v2/top-headlines?country=pl&category=health&apiKey=66c23059de4f4dddb4560a8f135edc9d", new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         }
     }
 

@@ -24,19 +24,23 @@
                 </StackLayout>
                 <StackLayout>
                     <Label Text="Data urodzenia " />
-                    <Label Text="{Binding User.BirthDate.Date}" />
+                    <Label Text="{Binding User.BirthDate.Date, StringFormat='{0:dd-MM-yyyy}'}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Wiek " />
+                    <Label Text="{Binding User.Age}" />
                 </StackLayout>
                 <StackLayout>
                     <Label Text="BMI " />
-                    <Label Text="{Binding User.BMI}" />
+                    <Label Text="{Binding BodyMessurements.BMI}" />
                 </StackLayout>
                 <StackLayout>
                     <Label Text="Wzrost(cm): " />
-                    <Label Text="{Binding User.Height}" />
+                    <Label Text="{Binding BodyMessurements.Height}" />
                 </StackLayout>
                 <StackLayout>
                     <Label Text="Waga(kg): " />
-                    <Label Text="{Binding User.Weight}" />
+                    <Label Text="{Binding BodyMessurements.Weight}" />
                 </StackLayout>
                 <StackLayout>
                     <Label Text="Talia(cm): " />

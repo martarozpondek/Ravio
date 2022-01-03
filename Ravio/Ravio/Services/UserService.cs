@@ -25,14 +25,12 @@ namespace Ravio.Services
         public async Task<UserSignUpResponse> SignUpAsync(UserSignUpRequest request)
         {
             var response = await HttpClient.PostAsJsonAsync("/Users/SignUp", request, JsonSerializerOptions);
-
             return await response.Content.ReadFromJsonAsync<UserSignUpResponse>(JsonSerializerOptions);
         }
 
         public async Task<UserCompleteProfileResponse> CompleteProfileAsync(UserCompleteProfileRequest request)
         {
             var response = await HttpClient.PostAsJsonAsync("/Users/CompleteProfile", request, JsonSerializerOptions);
-
             return await response.Content.ReadFromJsonAsync<UserCompleteProfileResponse>(JsonSerializerOptions);
         }
 
@@ -40,7 +38,7 @@ namespace Ravio.Services
         {
             SecureStorage.RemoveAll();
 
-            await Shell.Current.GoToAsync("///StartPage");
+            await Shell.Current.GoToAsync("StartPage");
         }
 
         public async Task<UserSignDownResponse> SignDownAsync()

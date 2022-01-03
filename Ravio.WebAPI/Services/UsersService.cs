@@ -56,12 +56,12 @@ namespace Ravio.WebAPI.Services
 
         public async Task<UserSignUpResponse> SignUpAsync(UserSignUpRequest request)
         {
-            var result = await UserManager.CreateAsync(new UserEntity(request.UserName) { Email = request.Email, PhoneNumber = request.PhoneNumber, BirthDate = request.BirthDate, Gender = request.Gender }, request.Password);
+            var result = await UserManager.CreateAsync(new UserEntity(request.UserName) { Email = request.Email, PhoneNumber = request.PhoneNumber, BirthDate = request.BirthDate, GenderTypeId = request.Gender.Id }, request.Password);
 
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByNameAsync(request.UserName);
-                return new UserSignUpResponse(true, "", JwtBearerTokenManager.Encode(user.Id, user.UserName, user.Email), user.Age, user.Gender, user.Lifestyle);
+                var user = await DatabaseContext.Accounts.Include(user => user.Gender).Include(user => user.Lifestyle).FirstOrDefaultAsync(user => user.UserName == request.UserName);
+                return new UserSignUpResponse(true, "", JwtBearerTokenManager.Encode(user.Id, user.UserName, user.Email), user.Age, user.Gender.Name);
             }
             else
             {
@@ -73,11 +73,12 @@ namespace Ravio.WebAPI.Services
         {
             var user = await DatabaseContext.Accounts.FirstOrDefaultAsync(user => user.UserName == userName);
             if (user == null) return new UserCompleteProfileResponse(false, "User not found");
-            user.Lifestyle = request.Lifestyle;
-            user.Target = request.Target;
+            user.LifestyleTypeId = request.Lifestyle.Id;
+            user.TargetTypeId = request.Target.Id;
+            await DatabaseContext.SaveChangesAsync();
 
 
-            await BodiesMessurementsRepository.PostBodyMessurements(new BodyMessurementsEntity() { User = user, Date = DateTime.Now, Weight = request.Weight, Height = request.Height, WaistMessurement = request.WaistMessurement, ChestMessurement = request.ChestMessurement, HipsMessurement = request.HipsMessurement, StomachMessurement = request.StomachMessurement, ThighMessurement = request.ThighMessurement });
+            await BodiesMessurementsRepository.PostBodyMessurementsByUserName(new BodyMessurementsEntity() { User = user, Date = DateTime.Now, Weight = request.Weight, Height = request.Height, WaistMessurement = request.WaistMessurement, ChestMessurement = request.ChestMessurement, HipsMessurement = request.HipsMessurement, StomachMessurement = request.StomachMessurement, ThighMessurement = request.ThighMessurement }, userName);
 
             return new UserCompleteProfileResponse(true, "", user.Target);
         }
@@ -95,7 +96,7 @@ namespace Ravio.WebAPI.Services
 
         public async Task<UserEntity> GetUserByUserName(string userName)
         {
-            return await UserManager.FindByNameAsync(userName);
+            return await DatabaseContext.Accounts.Include(account => account.Gender).FirstOrDefaultAsync(account => account.UserName == userName);
         }
     }
 }

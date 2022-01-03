@@ -15,7 +15,7 @@ namespace Ravio.Repositories
 
         public async Task<List<GenderType>> GetGenderTypes()
         {
-            return await HttpClient.GetFromJsonAsync<List<GenderType>>("/GenderTypes", JsonSerializerOptions);
+            return await HttpClient.GetFromJsonAsync<List<GenderType>>("AccountDetailsTypes/Genders", JsonSerializerOptions);
         }
     }
 }

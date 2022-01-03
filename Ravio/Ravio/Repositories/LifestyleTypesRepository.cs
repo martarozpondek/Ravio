@@ -15,7 +15,7 @@ namespace Ravio.Repositories
 
         public async Task<List<LifestyleType>> GetLifestyleTypes()
         {
-            return await HttpClient.GetFromJsonAsync<List<LifestyleType>>("/LifestyleTypes", JsonSerializerOptions);
+            return await HttpClient.GetFromJsonAsync<List<LifestyleType>>("AccountDetailsTypes/Lifestyles", JsonSerializerOptions);
         }
     }
 }

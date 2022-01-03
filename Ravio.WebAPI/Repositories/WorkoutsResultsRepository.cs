@@ -24,12 +24,12 @@ namespace Ravio.WebAPI.Repositories
 
         public async Task<WorkoutResultEntity> GetWorkoutResultById(int id)
         {
-            return await DatabaseContext.WorkoutsResults.FindAsync(id);
+            return await DatabaseContext.WorkoutsResults.Include(workoutResult => workoutResult.Workout).Include(workoutResult => workoutResult.Coordinates).FirstOrDefaultAsync(workoutResult => workoutResult.Id == id);
         }
 
         public async Task<List<WorkoutResultEntity>> GetWorkoutsResultsByUserName(string userName)
         {
-            return await DatabaseContext.WorkoutsResults.Where(workoutResult => workoutResult.User.UserName == userName).ToListAsync();
+            return await DatabaseContext.WorkoutsResults.Include(workoutResult => workoutResult.Workout).Include(workoutResult => workoutResult.Coordinates).Where(workoutResult => workoutResult.User.UserName == userName).ToListAsync();
         }
 
         public async Task PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName)

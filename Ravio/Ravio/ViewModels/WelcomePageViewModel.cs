@@ -15,6 +15,7 @@ namespace Ravio.ViewModels
         public WelcomePageViewModel()
         {
             CompleteProfileCommand = new Command(CompleteProfile);
+            CompleteProfileRequest = new UserCompleteProfileRequest();
 
             GetLifestyleTypes();
             GetTargetTypes();

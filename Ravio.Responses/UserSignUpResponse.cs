@@ -4,20 +4,24 @@ namespace Ravio.Responses
 {
     public class UserSignUpResponse
     {
+        public UserSignUpResponse()
+        {
+
+        }
+
         public UserSignUpResponse(bool isSucceeded, string error)
         {
             IsSucceeded = isSucceeded;
             Error = error;
         }
 
-        public UserSignUpResponse(bool isSucceeded, string error, string token, int age, GenderType gender, LifestyleType lifestyle)
+        public UserSignUpResponse(bool isSucceeded, string error, string token, int age, string genderName)
         {
             IsSucceeded = isSucceeded;
             Error = error;
             Token = token;
             Age = age;
-            Gender = gender;
-            Lifestyle = lifestyle;
+            GenderName = genderName;
         }
 
         public bool IsSucceeded { get; set; }
@@ -28,8 +32,6 @@ namespace Ravio.Responses
 
         public int Age { get; set; }
 
-        public GenderType Gender { get; set; }
-
-        public LifestyleType Lifestyle { get; set; }
+        public string GenderName { get; set; }
     }
 }

@@ -27,12 +27,12 @@ namespace Ravio.WebAPI.Repositories
 
         public async Task<List<FoodResultEntity>> GetFoodResultsByUserName(string userName)
         {
-            return await DatabaseContext.FoodResults.Where(foodResult => foodResult.User.UserName == userName).ToListAsync();
+            return await DatabaseContext.FoodResults.Include(foodResult => foodResult.AddedFood).Where(foodResult => foodResult.User.UserName == userName).ToListAsync();
         }
 
         public async Task<FoodResultEntity> GetCurrentFoodResult(string userName)
         {
-            return DatabaseContext.FoodResults.Include(foodResult => foodResult.AddedFood).FirstOrDefault(foodResult => foodResult.User.UserName == userName && foodResult.Date == DateTime.Now);
+            return DatabaseContext.FoodResults.Include(foodResult => foodResult.AddedFood).FirstOrDefault(foodResult => foodResult.User.UserName == userName && foodResult.Date.Date == DateTime.Now.Date);
         }
 
         public async Task PostFoodResultByUserName(FoodResultEntity foodResult, string userName)

@@ -1,6 +1,7 @@
 ﻿using Ravio.Entities;
 using Ravio.Services;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -20,6 +21,7 @@ namespace Ravio.ViewModels
             CheckFoodAward();
         }
 
+
         private WorkoutsResultsService WorkoutsResultsService => DependencyService.Get<WorkoutsResultsService>();
         private ExercisesResultsService ExercisesResultsService => DependencyService.Get<ExercisesResultsService>();
         private FoodResultsService FoodResultsService => DependencyService.Get<FoodResultsService>();
@@ -36,11 +38,11 @@ namespace Ravio.ViewModels
                     {
                         int targetCalories = 0;
 
-                        if (await SecureStorage.GetAsync("Gender") == "Female")
+                        if (await SecureStorage.GetAsync("Gender") == "Kobieta")
                         {
                             targetCalories = (int)((10 * (Convert.ToInt32(await SecureStorage.GetAsync("Weight")))) + (6.25 * (Convert.ToInt32(await SecureStorage.GetAsync("Height")))) - (5 * (Convert.ToInt32(await SecureStorage.GetAsync("Age")))) - 161)* (Convert.ToInt32(await SecureStorage.GetAsync("Lifestyle")));
                         }
-                        if (await SecureStorage.GetAsync("Gender") == "Male")
+                        if (await SecureStorage.GetAsync("Gender") == "Mężczyzna")
                         {
                             targetCalories = (int)((10 * (Convert.ToInt32(await SecureStorage.GetAsync("Weight")))) + (6.25 * (Convert.ToInt32(await SecureStorage.GetAsync("Height")))) - (5 * (Convert.ToInt32(await SecureStorage.GetAsync("Age")))) +5) * (Convert.ToInt32(await SecureStorage.GetAsync("Lifestyle")));
                         }
@@ -96,12 +98,6 @@ namespace Ravio.ViewModels
         private async void GoToComponent(string componentName)
         {
             await Shell.Current.GoToAsync(componentName);
-        }
-
-        public Command<string> DisplayTokenCommand { get; set; }
-        private async void DisplayToken()
-        {
-            await Shell.Current.DisplayAlert("Token", await Xamarin.Essentials.SecureStorage.GetAsync("Token"), "Ok");
         }
     }
 }

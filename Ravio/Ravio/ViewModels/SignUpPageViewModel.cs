@@ -4,6 +4,8 @@ using Ravio.Requests;
 using Ravio.Services;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -16,11 +18,15 @@ namespace Ravio.ViewModels
             UserSignUpRequest = new UserSignUpRequest();
 
             SignUpCommand = new Command(SignUp);
+
+            GetGenderTypes();
         }
 
         private UserService UserService => DependencyService.Get<UserService>();
 
         private GendersRepository GendersRepository => DependencyService.Get<GendersRepository>();
+
+        private HttpClient HttpClient => DependencyService.Get<HttpClient>();
 
         private UserSignUpRequest userSignUpRequest;
         public UserSignUpRequest UserSignUpRequest
@@ -43,6 +49,11 @@ namespace Ravio.ViewModels
             set { SetProperty(ref error, value); }
         }
 
+        private async void GetGenderTypes()
+        {
+            Genders = await GendersRepository.GetGenderTypes();
+        }
+
         public Command SignUpCommand { get; set; }
         private async void SignUp()
         {
@@ -50,10 +61,12 @@ namespace Ravio.ViewModels
             if (Response.IsSucceeded)
             {
                 await SecureStorage.SetAsync("UserName", UserSignUpRequest.UserName);
+                await SecureStorage.SetAsync("GenderName", Response.GenderName);
                 await SecureStorage.SetAsync("Age", Convert.ToString(Response.Age));
-                await SecureStorage.SetAsync("Gender", Response.Gender.Name);
                 await SecureStorage.SetAsync("Token", Response.Token);
-                await Shell.Current.GoToAsync("///WelcomePage");
+                var xd = await SecureStorage.GetAsync("Token");
+                HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Response.Token);
+                await Shell.Current.GoToAsync("WelcomePage");
             }
             else
             {

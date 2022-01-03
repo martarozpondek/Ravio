@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Ravio.WebAPI.Controllers
 {
     [Route("[Controller]")]
-    [Authorize(JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class FoodResultsController : ControllerBase
     {

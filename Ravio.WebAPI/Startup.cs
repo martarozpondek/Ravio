@@ -51,8 +51,12 @@ namespace Ravio.WebAPI
             serviceCollection.AddScoped<IWorkoutsResultsService, WorkoutsResultsService>();
             serviceCollection.AddScoped<IExercisesResultsService, ExercisesResultsService>();
             serviceCollection.AddScoped<IFoodResultsService, FoodResultsService>();
+            serviceCollection.AddScoped<IAddedFoodRepository, AddedFoodRepository>();
 
             serviceCollection.AddScoped<IBodiesMessurementsRepository, BodiesMessurementsRepository>();
+            serviceCollection.AddScoped<IBodiesMessuerementsService, BodiesMessurementsService>();
+
+            serviceCollection.AddScoped<INewsRepository, NewsRepository>();
 
             serviceCollection.AddScoped<IUsersService, UsersService>();
         }

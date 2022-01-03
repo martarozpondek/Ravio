@@ -13,7 +13,6 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
-            <Button Text="Display Token" Command="{Binding DisplayTokenCommand}"/>
             <Frame>
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoToComponentCommand}" CommandParameter="WorkoutsPage"/>

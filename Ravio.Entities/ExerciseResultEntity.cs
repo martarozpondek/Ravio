@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ravio.Entities
 {
@@ -12,9 +13,11 @@ namespace Ravio.Entities
 
         public DateTime? EndTime { get; set; }
 
-        public TimeSpan? Time { get; set; }
+        [NotMapped]
+        public TimeSpan? Time { get { return EndTime - StartTime; } set { } }
 
-        public int? Calories { get; set; }
+        [NotMapped]
+        public int? Calories { get { return NumberOfRepetitions * Exercise.BurningParameter; } set { }  }
 
         public int? ExerciseId { get; set; }
         public virtual ExerciseEntity Exercise { get; set; }

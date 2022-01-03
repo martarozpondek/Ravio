@@ -2,6 +2,7 @@
 using Ravio.Repositories;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Ravio.ViewModels
@@ -12,7 +13,7 @@ namespace Ravio.ViewModels
         {
             StartWorkoutCommand = new Command<string>(StartWorkout);
 
-            Workouts = new List<WorkoutEntity>() { new WorkoutEntity() { Name = "Bieganie" }, new WorkoutEntity() { Name = "Rower" } };
+            GetWorkouts();
         }
 
         private WorkoutsRepository WorkoutsRepository => DependencyService.Get<WorkoutsRepository>();
@@ -22,6 +23,11 @@ namespace Ravio.ViewModels
         {
             get { return workouts; }
             set { SetProperty(ref workouts, value); }
+        }
+
+        public async Task GetWorkouts()
+        {
+            Workouts = await WorkoutsRepository.GetAll();
         }
 
         public Command<string> StartWorkoutCommand { get; set; }

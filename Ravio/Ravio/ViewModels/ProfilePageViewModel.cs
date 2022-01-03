@@ -15,8 +15,6 @@ namespace Ravio.ViewModels
             SignOutCommand = new Command(SignOut);
             SignDownCommand = new Command(SignDown);
 
-            GetUserByUserName();
-            GetLastBodyMessurementsByUserName();
         }
 
         private UserService UserService => DependencyService.Get<UserService>();
@@ -39,6 +37,7 @@ namespace Ravio.ViewModels
         public async Task GetUserByUserName()
         {
             User = await UserService.GetUserByUserName();
+
         }
 
         public async Task GetLastBodyMessurementsByUserName()

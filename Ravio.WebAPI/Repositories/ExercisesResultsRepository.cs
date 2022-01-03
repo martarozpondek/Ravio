@@ -24,7 +24,9 @@ namespace Ravio.WebAPI.Repositories
 
         public async Task<List<ExerciseResultEntity>> GetExercisesResultsByUserName(string userName)
         {
-            return await DatabaseContext.ExercisesResults.Where(exerciseResult => exerciseResult.User.UserName == userName).ToListAsync();
+            var Siema = DatabaseContext.ExercisesResults.Include(x => x.Exercise).FirstOrDefault();
+            var xd = await DatabaseContext.ExercisesResults.Include(exercise => exercise.Exercise).Where(exerciseResult => exerciseResult.User.UserName == userName).ToListAsync();
+            return await DatabaseContext.ExercisesResults.Include(exercise => exercise.Exercise).Where(exerciseResult => exerciseResult.User.UserName == userName).ToListAsync();
         }
 
         public async Task PostExerciseResultByUserName(ExerciseResultEntity exerciseResult, string userName)

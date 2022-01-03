@@ -12,7 +12,7 @@ namespace Ravio.WebAPI.Repositories
 
         Task<BodyMessurementsEntity> GetLastBodyMessurementsByUserName(string userName);
 
-        Task PostBodyMessurements(BodyMessurementsEntity bodyMessurements);
+        Task PostBodyMessurementsByUserName(BodyMessurementsEntity bodyMessurements, string userName);
     }
 
     public class BodiesMessurementsRepository : IBodiesMessurementsRepository
@@ -31,10 +31,10 @@ namespace Ravio.WebAPI.Repositories
 
         public async Task<BodyMessurementsEntity> GetLastBodyMessurementsByUserName(string userName)
         {
-            return await DatabaseContext.BodiesMessurements.LastAsync(bodyMessurement => bodyMessurement.User.UserName == userName);
+            return await DatabaseContext.BodiesMessurements.OrderByDescending(bodyMessurement => bodyMessurement.User.UserName == userName).FirstOrDefaultAsync();
         }
 
-        public async Task PostBodyMessurements(BodyMessurementsEntity bodyMessurements)
+        public async Task PostBodyMessurementsByUserName(BodyMessurementsEntity bodyMessurements, string userName)
         {
             await DatabaseContext.BodiesMessurements.AddAsync(bodyMessurements);
             await DatabaseContext.SaveChangesAsync();

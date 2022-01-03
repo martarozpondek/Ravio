@@ -2,6 +2,7 @@
 using Ravio.Services;
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Xamarin.Essentials;
@@ -15,7 +16,7 @@ namespace Ravio
         {
             InitializeComponent();
 
-            DependencyService.RegisterSingleton(new HttpClient() { BaseAddress = new Uri("https://SERVER-ROBIRT") });
+            DependencyService.RegisterSingleton(new HttpClient() { BaseAddress = new Uri("http://192.168.2.50") });
             DependencyService.RegisterSingleton(new JsonSerializerOptions() { WriteIndented = true, ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive = true });
 
             DependencyService.Register<UserService>();
@@ -46,14 +47,24 @@ namespace Ravio
             MainPage = new AppShell();
         }
 
+
+        private HttpClient HttpClient => DependencyService.Get<HttpClient>();
+
         protected override async void OnStart()
         {
-            //if (await SecureStorage.GetAsync("Token") == null)
-            //{
-            //    await Shell.Current.GoToAsync("///HomePage");
-            //}
+            var siema1 = await SecureStorage.GetAsync("Token");
+            var siema2 = await SecureStorage.GetAsync("GenderName");
 
-            await Shell.Current.GoToAsync("ExerciseResultPage?id=3");
+            if (await SecureStorage.GetAsync("Token") == null)
+            {
+                await Shell.Current.GoToAsync("/StartPage");
+            }
+
+            else
+            {
+                HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await SecureStorage.GetAsync("Token"));
+
+            }
         }
     }
 }

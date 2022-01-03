@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ravio.Entities
 {
@@ -11,6 +12,9 @@ namespace Ravio.Entities
         public double Weight { get; set; }
 
         public double Height { get; set; }
+
+        [NotMapped]
+        public double BMI { get { return  Math.Round(Weight / ((Height / 100) * (Height / 100)), 2); } }
 
         public double WaistMessurement { get; set; }
 

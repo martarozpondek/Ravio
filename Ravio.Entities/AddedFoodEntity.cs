@@ -16,7 +16,7 @@ namespace Ravio.Entities
 
         public FoodType Type { get; set; }
 
-        private int? FoodResultId { get; set; }
+        public int? FoodResultId { get; set; }
         public virtual FoodResultEntity FoodResult { get; set; }
     }
 

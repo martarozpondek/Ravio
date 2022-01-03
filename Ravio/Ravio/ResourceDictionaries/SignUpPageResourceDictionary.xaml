@@ -15,9 +15,16 @@
         <Setter Property="VerticalTextAlignment" Value="Center"/>
         <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="FontSize" Value="24"/>
+        <Setter Property="TextColor" Value="{StaticResource AccentColor}"/>
     </Style>
 
     <Style TargetType="Entry">
+        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="Picker">
         <Setter Property="WidthRequest" Value="100"/>
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="VerticalTextAlignment" Value="Center"/>
@@ -27,7 +34,7 @@
         <Setter Property="WidthRequest" Value="385"/>
         <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}"/>
-        <Setter Property="TextColor" Value="{StaticResource PrimaryForegroundColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource PrimaryBackgroundColor}"/>
     </Style>
 
     <Style TargetType="StackLayout">
