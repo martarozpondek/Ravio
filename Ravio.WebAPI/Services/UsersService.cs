@@ -56,7 +56,7 @@ namespace Ravio.WebAPI.Services
 
         public async Task<UserSignUpResponse> SignUpAsync(UserSignUpRequest request)
         {
-            var result = await UserManager.CreateAsync(new UserEntity(request.UserName) { Email = request.Email, PhoneNumber = request.PhoneNumber, BirthDate = request.BirthDate, GenderTypeId = request.Gender.Id }, request.Password);
+            var result = await UserManager.CreateAsync(new UserEntity(request.UserName) { Email = request.Email, PhoneNumber = request.PhoneNumber, BirthDate = request.BirthDate, GenderTypeId = request.GenderTypeId }, request.Password);
 
             if (result.Succeeded)
             {

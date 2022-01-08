@@ -8,9 +8,11 @@ namespace Ravio.WebAPI.Repositories
 {
     public interface IExercisesResultsRepository
     {
+        Task<ExerciseResultEntity> GetExerciseResultById(int id);
+
         Task<List<ExerciseResultEntity>> GetExercisesResultsByUserName(string userName);
         
-        Task PostExerciseResultByUserName(ExerciseResultEntity exerciseResult, string userName);
+        Task<ExerciseResultEntity> PostExerciseResultByUserName(ExerciseResultEntity exerciseResult, string userName);
     }
 
     public class ExercisesResultsRepository : IExercisesResultsRepository
@@ -22,20 +24,29 @@ namespace Ravio.WebAPI.Repositories
 
         private DatabaseContext DatabaseContext { get; }
 
+
+        public async Task<ExerciseResultEntity> GetExerciseResultById(int id)
+        {
+            return await DatabaseContext.ExercisesResults.Include(exerciseResult => exerciseResult.Exercise).FirstOrDefaultAsync(workoutResult => workoutResult.Id == id);
+        }
+
         public async Task<List<ExerciseResultEntity>> GetExercisesResultsByUserName(string userName)
         {
-            var Siema = DatabaseContext.ExercisesResults.Include(x => x.Exercise).FirstOrDefault();
-            var xd = await DatabaseContext.ExercisesResults.Include(exercise => exercise.Exercise).Where(exerciseResult => exerciseResult.User.UserName == userName).ToListAsync();
             return await DatabaseContext.ExercisesResults.Include(exercise => exercise.Exercise).Where(exerciseResult => exerciseResult.User.UserName == userName).ToListAsync();
         }
 
-        public async Task PostExerciseResultByUserName(ExerciseResultEntity exerciseResult, string userName)
+        public async Task<ExerciseResultEntity> PostExerciseResultByUserName(ExerciseResultEntity exerciseResult, string userName)
         {
-            exerciseResult.User = await DatabaseContext.Accounts.FirstOrDefaultAsync(account => account.UserName == userName);
+            var user = await DatabaseContext.Accounts.FirstOrDefaultAsync(account => account.UserName == userName);
+            exerciseResult.UserId = user.Id;
 
-            await DatabaseContext.ExercisesResults.AddAsync(exerciseResult);
+            var result = await DatabaseContext.ExercisesResults.AddAsync(exerciseResult);
 
             await DatabaseContext.SaveChangesAsync();
+
+            var data = await DatabaseContext.ExercisesResults.Include(x => x.Exercise).FirstOrDefaultAsync(x => x.Id == result.Entity.Id);
+            data.User = null;
+            return data;
         }
     }
 }

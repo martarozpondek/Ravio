@@ -25,7 +25,7 @@ namespace Ravio.Repositories
 
         public async Task<WorkoutResultEntity> Add(WorkoutResultEntity workoutResult)
         {
-            var response = await HttpClient.PostAsJsonAsync("/Workouts", workoutResult, JsonSerializerOptions);
+            var response = await HttpClient.PostAsJsonAsync("/WorkoutsResults", workoutResult, JsonSerializerOptions);
             return await response.Content.ReadFromJsonAsync<WorkoutResultEntity>();
         }
     }

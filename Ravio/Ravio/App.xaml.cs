@@ -17,13 +17,14 @@ namespace Ravio
             InitializeComponent();
 
             DependencyService.RegisterSingleton(new HttpClient() { BaseAddress = new Uri("http://192.168.2.50") });
-            DependencyService.RegisterSingleton(new JsonSerializerOptions() { WriteIndented = true, ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive = true });
+            DependencyService.RegisterSingleton(new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive = true, WriteIndented = true });
 
             DependencyService.Register<UserService>();
             DependencyService.Register<GendersRepository>();
             DependencyService.Register<LifestyleTypesRepository>();
             DependencyService.Register<TargetTypesRepository>();
             DependencyService.Register<BodiesMessurementsRepository>();
+            DependencyService.Register<AwardsService>();
             DependencyService.Register<AwardsRepository>();
 
             DependencyService.Register<NewsRepository>();

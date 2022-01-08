@@ -59,7 +59,7 @@ namespace Ravio.ViewModels
         public async Task GetWorkout()
         {
             Workout = await WorkoutsRepository.GetByName(WorkoutName);
-            WorkoutResult.Workout = Workout;
+            WorkoutResult.WorkoutId = Workout.Id;
         }
 
         private async Task StartWorkout()
@@ -67,6 +67,8 @@ namespace Ravio.ViewModels
             IsWorkoutMode = true;
 
             WorkoutResult.StartTime = DateTime.Now;
+
+            WorkoutResult.Coordinates = new List<CoordinatesEntity>();
 
             Polyline Line = new Polyline() { StrokeColor = Color.Purple, StrokeWidth = 10 };
 
@@ -81,14 +83,12 @@ namespace Ravio.ViewModels
                 var position = await WorkoutService.GetUserPosition();
                 Speeds.Add(await WorkoutService.GetUserSpeed());
 
-                //WorkoutResult.Coordinates.Add(new CoordinatesEntity(position.Latitude, position.Latitude));
+                WorkoutResult.Coordinates.Add(new CoordinatesEntity(position.Latitude, position.Latitude));
 
                 Map.MoveToRegion(new MapSpan(position, 0.01, 0.01));
 
                 Line.Geopath.Add(position);
                 Map.MapElements.Add(Line);
-
-
 
                 await Task.Delay(5000);
             }
@@ -103,13 +103,15 @@ namespace Ravio.ViewModels
         {
             IsWorkoutMode = false;
 
+            WorkoutResult.WorkoutId = Workout.Id;
+
             WorkoutResult.EndTime = DateTime.Now;
 
             WorkoutResult.Distance = WorkoutService.CalculateDistanceBetweenPoints(WorkoutResult.Coordinates);
 
             var result = await WorkoutService.FinishWorkout(workoutResult);
 
-            await Shell.Current.GoToAsync($"WorkoutResultPage?{result.Id}");
+            await Shell.Current.GoToAsync($"WorkoutResultPage?id={result.Id}");
         }
     }
 }

@@ -29,7 +29,7 @@
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Czas:" Style="{StaticResource Title}"/>
-                        <Label Text="{Binding ExerciseResult.Time, StringFormat='{0:HH\\:mm\\:ss}'}"/>
+                        <Label Text="{Binding ExerciseResult.Time, StringFormat='\{0:hh\\:mm\\:ss\\.ff\}'}"/>
                     </StackLayout>
                 </FlexLayout>
             </Grid>

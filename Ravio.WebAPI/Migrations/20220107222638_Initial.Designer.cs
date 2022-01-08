@@ -10,7 +10,7 @@ using Ravio.WebAPI;
 namespace Ravio.WebAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220101203648_Initial")]
+    [Migration("20220107222638_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

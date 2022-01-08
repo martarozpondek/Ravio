@@ -36,7 +36,7 @@ namespace Ravio.Services
 
             var CoordinatesList = coordinates.ToList();
 
-            for (int Iterator = 0; Iterator < coordinates.Count; Iterator++)
+            for (int Iterator = 1; Iterator < coordinates.Count; Iterator++)
             {
                 Distance += Location.CalculateDistance(new Location(CoordinatesList[Iterator].Latitude, CoordinatesList[Iterator].Longitude), new Location(CoordinatesList[Iterator - 1].Latitude, CoordinatesList[Iterator - 1].Longitude), DistanceUnits.Kilometers);
             }

@@ -1,5 +1,6 @@
 ﻿using Ravio.Entities;
 using Ravio.Services;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -22,7 +23,7 @@ namespace Ravio.ViewModels
         public int WorkoutResultId
         {
             get { return workoutResultid; }
-            set { SetProperty(ref workoutResultid, value); GetWorkoutResult(); CreateMapLine(); }
+            set { SetProperty(ref workoutResultid, value); }
         }
 
         private Xamarin.Forms.Maps.Map map;
@@ -39,7 +40,7 @@ namespace Ravio.ViewModels
             set { SetProperty(ref workoutResult, value); }
         }
 
-        public async void CreateMapLine()
+        public async Task CreateMapLine()
         {
             Polyline Line = new Polyline() { StrokeColor = Color.Purple, StrokeWidth = 10 };
             foreach (var coordinates in WorkoutResult.Coordinates)
@@ -51,7 +52,7 @@ namespace Ravio.ViewModels
             Map.MapElements.Add(Line);
         }
 
-        public async void GetWorkoutResult()
+        public async Task GetWorkoutResult()
         {
             WorkoutResult = await WorkoutsResultsService.GetById(WorkoutResultId);
         }

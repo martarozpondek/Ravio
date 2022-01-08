@@ -12,7 +12,9 @@ namespace Ravio.ViewModels
     {
         public SearchFoodPageViewModel()
         {
+            SearchFoodCommand = new Command(SearchFood);
 
+            AddFoodCommand = new Command(AddFood);
         }
 
         private FoodResultsService FoodResultsService => DependencyService.Get<FoodResultsService>();
@@ -51,7 +53,11 @@ namespace Ravio.ViewModels
         public Command AddFoodCommand { get; set; }
         private async void AddFood()
         {
-            await AddedFoodRepository.AddFood(new AddedFoodEntity() { Name = SearchedFood.Name, Calories = SearchedFood.Calories, Grams = SearchedFood.Grams, Type = (FoodType)Enum.Parse(typeof(FoodType), FoodTypeName, true) });
+            var foodResult = await FoodResultsService.GetCurrentFoodResult();
+
+            await AddedFoodRepository.AddFood(new AddedFoodEntity() { FoodResultId = foodResult.Id,  Name = SearchedFood.Name, Calories = SearchedFood.Calories, Grams = SearchedFood.Grams, Type = (FoodType)Enum.Parse(typeof(FoodType), FoodTypeName, true) });
+
+            await Shell.Current.GoToAsync("FoodPage");
         }
     }
 }

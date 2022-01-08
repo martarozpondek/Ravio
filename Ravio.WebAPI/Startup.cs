@@ -65,8 +65,6 @@ namespace Ravio.WebAPI
         {
             databaseContext.Database.Migrate();
 
-            applicationBuilder.UseHttpsRedirection();
-
             applicationBuilder.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             applicationBuilder.UseRouting();

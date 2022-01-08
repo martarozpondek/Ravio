@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Ravio.Entities
 {
@@ -14,9 +15,11 @@ namespace Ravio.Entities
         public DateTime? EndTime { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public TimeSpan? Time { get { return EndTime - StartTime; } set { } }
 
         [NotMapped]
+        [JsonIgnore]
         public int? Calories { get { return NumberOfRepetitions * Exercise.BurningParameter; } set { }  }
 
         public int? ExerciseId { get; set; }

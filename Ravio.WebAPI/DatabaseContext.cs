@@ -99,5 +99,12 @@ namespace Ravio.WebAPI
             builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =9, Name= "Wędlina drobiowa", Grams= 20, Calories=15});
             builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =10, Name= "Ziemniaki", Grams= 200, Calories=150});
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlServer("Data Source=SERVER-ROBIRT\\SQLDEVELOPER;Initial Catalog=Ravio;User Id=sa;Password=CortX-1RDS;");
+        }
     }
 }

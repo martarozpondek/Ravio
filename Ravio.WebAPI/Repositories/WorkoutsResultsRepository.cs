@@ -10,7 +10,7 @@ namespace Ravio.WebAPI.Repositories
     {
         Task<WorkoutResultEntity> GetWorkoutResultById(int id);
         Task<List<WorkoutResultEntity>> GetWorkoutsResultsByUserName(string userName);
-        Task PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName);
+        Task<WorkoutResultEntity> PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName);
     }
 
     public class WorkoutsResultsRepository : IWorkoutsResultsRepository
@@ -32,13 +32,18 @@ namespace Ravio.WebAPI.Repositories
             return await DatabaseContext.WorkoutsResults.Include(workoutResult => workoutResult.Workout).Include(workoutResult => workoutResult.Coordinates).Where(workoutResult => workoutResult.User.UserName == userName).ToListAsync();
         }
 
-        public async Task PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName)
+        public async Task<WorkoutResultEntity> PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName)
         {
-            workoutResult.User = await DatabaseContext.Accounts.FirstOrDefaultAsync(account => account.UserName == userName);
+            var user = await DatabaseContext.Accounts.FirstOrDefaultAsync(account => account.UserName == userName);
+            workoutResult.UserId = user.Id;
 
-            await DatabaseContext.WorkoutsResults.AddAsync(workoutResult);
+            var result = await DatabaseContext.WorkoutsResults.AddAsync(workoutResult);
 
             await DatabaseContext.SaveChangesAsync();
+
+            var data = await DatabaseContext.WorkoutsResults.Include(x => x.Workout).FirstOrDefaultAsync(x => x.Id == result.Entity.Id);
+            data.User = null;
+            return data;
         }
     }
 }

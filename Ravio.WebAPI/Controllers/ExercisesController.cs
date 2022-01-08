@@ -23,10 +23,10 @@ namespace Ravio.WebAPI.Controllers
             return await ExercisesRepository.GetExercises();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ExerciseEntity> GetExercise(int id)
+        [HttpGet("{exerciseName}")]
+        public async Task<ExerciseEntity> GetExerciseByName(string exerciseName)
         {
-            return await ExercisesRepository.GetExercise(id);
+            return await ExercisesRepository.GetExerciseByName(exerciseName);
         }
     }
 }

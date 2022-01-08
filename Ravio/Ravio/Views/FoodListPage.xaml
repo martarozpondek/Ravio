@@ -47,7 +47,7 @@
                     <Button Command="{Binding GoToSearchFoodPageCommand}" CommandParameter="Snacks"/>
                 </StackLayout>
                 <StackLayout  Orientation="Vertical">
-                    <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" BindableLayout.ItemsSource="{Binding SnacksList}" BindableLayout.ItemTemplate="{StaticResource MealsListItemTemplate}"/>
+                    <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" BindableLayout.ItemsSource="{Binding SnackList}" BindableLayout.ItemTemplate="{StaticResource MealsListItemTemplate}"/>
                 </StackLayout>
                 <StackLayout>
                     <Label>

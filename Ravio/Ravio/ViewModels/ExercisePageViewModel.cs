@@ -91,13 +91,15 @@ namespace Ravio.ViewModels
         {
             IsExerciseMode = false;
 
+            ExerciseResult.ExerciseId = Exercise.Id;
+
             ExerciseResult.EndTime = DateTime.Now;
 
             ExerciseResult.NumberOfRepetitions = Convert.ToInt32(await Shell.Current.DisplayPromptAsync("Liczba powtórzeń", "Wpisz liczbę powtórzeń"));
 
             var result = await ExerciseService.FinishExercise(ExerciseResult);
 
-            await Shell.Current.GoToAsync($"ExerciseResultPage?{result.Id}");
+            await Shell.Current.GoToAsync($"ExerciseResultPage?id={result.Id}");
         }
     }
 }

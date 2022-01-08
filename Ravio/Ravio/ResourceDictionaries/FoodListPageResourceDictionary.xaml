@@ -27,11 +27,22 @@
         <Setter Property="Text" Value="+" />
         <Setter Property="TextColor" Value="#6336E0" />
     </Style>
+
+    <Style TargetType="Label" x:Key="MealsListLabel">
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="WidthRequest" Value="125"/>
+        <Setter Property="HeightRequest" Value="40"/>
+    </Style>
     <DataTemplate x:Key="MealsListItemTemplate">
         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-            <Label Text="{Binding Name}"/>
-            <Label Text="{Binding Calories, StringFormat='{0} kcal'}"/>
-            <Label Text="{Binding Grams, StringFormat='{0} g'}"/>
+            <Label Text="{Binding Name}" Style="{StaticResource MealsListLabel}"/>
+            <Label Text="{Binding Calories, StringFormat='{0} kcal'}" Style="{StaticResource MealsListLabel}"/>
+            <Label Text="{Binding Grams, StringFormat='{0} g'}" Style="{StaticResource MealsListLabel}"/>
         </StackLayout>
     </DataTemplate>
+
 </ResourceDictionary>

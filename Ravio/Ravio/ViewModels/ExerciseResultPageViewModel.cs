@@ -1,5 +1,6 @@
 ﻿using Ravio.Entities;
 using Ravio.Services;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Ravio.ViewModels
@@ -28,7 +29,7 @@ namespace Ravio.ViewModels
             set { SetProperty(ref exerciseResult, value); }
         }
 
-        public async void GetExerciseResult()
+        public async Task GetExerciseResult()
         {
             ExerciseResult = await ExercisesResultsService.GetById(ExerciseResultId);
         }

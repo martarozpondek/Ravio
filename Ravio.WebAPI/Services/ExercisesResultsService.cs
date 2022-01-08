@@ -7,9 +7,11 @@ namespace Ravio.WebAPI.Services
 {
     public interface IExercisesResultsService
     {
+        Task<ExerciseResultEntity> GetExerciseResultById(int id);
+
         Task<List<ExerciseResultEntity>> GetExercisesResultsByUserName(string userName);
 
-        Task PostExerciseResultByUserName(ExerciseResultEntity exerciseResult, string userName);
+        Task<ExerciseResultEntity> PostExerciseResultByUserName(ExerciseResultEntity exerciseResult, string userName);
     }
 
     public class ExercisesResultsService : IExercisesResultsService
@@ -21,14 +23,19 @@ namespace Ravio.WebAPI.Services
 
         private IExercisesResultsRepository ExercisesResultsRepository { get; }
 
+        public async Task<ExerciseResultEntity> GetExerciseResultById(int id)
+        {
+            return await ExercisesResultsRepository.GetExerciseResultById(id);
+        }
+
         public async Task<List<ExerciseResultEntity>> GetExercisesResultsByUserName(string userName)
         {
             return await ExercisesResultsRepository.GetExercisesResultsByUserName(userName);
         }
 
-        public async Task PostExerciseResultByUserName(ExerciseResultEntity exerciseResult, string userName)
+        public async Task<ExerciseResultEntity> PostExerciseResultByUserName(ExerciseResultEntity exerciseResult, string userName)
         {
-            await ExercisesResultsRepository.PostExerciseResultByUserName(exerciseResult, userName);
+            return await ExercisesResultsRepository.PostExerciseResultByUserName(exerciseResult, userName);
         }
     }
 }

@@ -8,5 +8,12 @@ namespace Ravio.Views
         {
             InitializeComponent();
         }
+
+        protected override async void OnAppearing()
+        {
+            var ViewModel = BindingContext as ViewModels.ExercisesStatisticsPageViewModel;
+            await ViewModel.GetExerciseResults();
+            await ViewModel.GetExerciseAwards();
+        }
     }
 }

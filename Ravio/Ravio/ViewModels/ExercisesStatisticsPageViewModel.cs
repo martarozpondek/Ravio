@@ -11,8 +11,7 @@ namespace Ravio.ViewModels
     {
         public ExercisesStatisticsPageViewModel()
         {
-            GetExerciseResults();
-            GetExerciseAwards();
+
         }
 
         private ExercisesResultsService ExercisesResultsService => DependencyService.Get<ExercisesResultsService>();

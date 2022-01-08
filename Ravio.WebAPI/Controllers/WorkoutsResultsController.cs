@@ -33,9 +33,9 @@ namespace Ravio.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task PostWorkoutResultByUserName(WorkoutResultEntity workoutResult)
+        public async Task<WorkoutResultEntity> PostWorkoutResultByUserName(WorkoutResultEntity workoutResult)
         {
-            await WorkoutsResultsService.PostWorkoutResultByUserName(workoutResult, User.Identity.Name);
+            return await WorkoutsResultsService.PostWorkoutResultByUserName(workoutResult, User.Identity.Name);
         }
     }
 }

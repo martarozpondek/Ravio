@@ -11,7 +11,7 @@ namespace Ravio.WebAPI.Services
 
         Task<List<WorkoutResultEntity>> GetWorkoutsResultsByUserName(string userName);
 
-        Task PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName);
+        Task<WorkoutResultEntity> PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName);
     }
 
     public class WorkoutsResultsService : IWorkoutsResultsService
@@ -33,9 +33,9 @@ namespace Ravio.WebAPI.Services
             return await WorkoutsResultsRepository.GetWorkoutsResultsByUserName(userName);
         }
 
-        public async Task PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName)
+        public async Task<WorkoutResultEntity> PostWorkoutResultByUserName(WorkoutResultEntity workoutResult, string userName)
         {
-            await WorkoutsResultsRepository.PostWorkoutResultByUserName(workoutResult, userName);
+            return await WorkoutsResultsRepository.PostWorkoutResultByUserName(workoutResult, userName);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Ravio.Repositories
         
         public async Task<List<ExerciseResultEntity>> GetByUserName()
         {
-            return await HttpClient.GetFromJsonAsync<List<ExerciseResultEntity>>("/ExerciseResults", JsonSerializerOptions);
+            return await HttpClient.GetFromJsonAsync<List<ExerciseResultEntity>>("/ExercisesResults", JsonSerializerOptions);
         }
 
         public async Task<ExerciseResultEntity> Add(ExerciseResultEntity exerciseResult)

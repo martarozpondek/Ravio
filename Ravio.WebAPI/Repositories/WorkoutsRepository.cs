@@ -9,7 +9,7 @@ namespace Ravio.WebAPI.Repositories
     {
         Task<List<WorkoutEntity>> GetWorkouts();
 
-        Task<WorkoutEntity> GetWorkout(int id);
+        Task<WorkoutEntity> GetWorkoutByName(string name);
     }
 
     public class WorkoutsRepository : IWorkoutsRepository
@@ -26,9 +26,9 @@ namespace Ravio.WebAPI.Repositories
             return await DatabaseContext.Workouts.ToListAsync();
         }
 
-        public async Task<WorkoutEntity> GetWorkout(int id)
+        public async Task<WorkoutEntity> GetWorkoutByName(string name)
         {
-            return await DatabaseContext.Workouts.FindAsync(id);
+            return await DatabaseContext.Workouts.FirstOrDefaultAsync(workout => workout.Name == name);
         }
     }
 }

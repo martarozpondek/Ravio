@@ -24,7 +24,13 @@
                             </DataTrigger>
                         </Button.Triggers>
                     </Button>
-                    <Button Text="Zakończ" Command="{Binding FinishExerciseCommand}"/>
+                    <Button Text="Zakończ" Command="{Binding FinishExerciseCommand}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsExerciseMode}" Value="False">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
                 </FlexLayout>
             </Frame>
         </FlexLayout>

@@ -2,6 +2,11 @@
 {
     public class CoordinatesEntity
     {
+        public CoordinatesEntity()
+        {
+
+        }
+
         public CoordinatesEntity(double latitude, double longitude)
         {
             Latitude = latitude;

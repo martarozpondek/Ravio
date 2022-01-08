@@ -19,7 +19,13 @@ namespace Ravio.WebAPI.Controllers
         }
 
         private IExercisesResultsService ExercisesResultsService { get; }
-        
+
+        [HttpGet("{id}")]
+        public async Task<ExerciseResultEntity> GetExerciseResultById(int id)
+        {
+            return await ExercisesResultsService.GetExerciseResultById(id);
+        }
+
         [HttpGet]
         public async Task<List<ExerciseResultEntity>> GetExercisesResultsByUserName()
         {
@@ -27,9 +33,9 @@ namespace Ravio.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task PostExerciseResultByUserName(ExerciseResultEntity exerciseResult)
+        public async Task<ExerciseResultEntity> PostExerciseResultByUserName(ExerciseResultEntity exerciseResult)
         {
-            await ExercisesResultsService.PostExerciseResultByUserName(exerciseResult, User.Identity.Name);
+            return await ExercisesResultsService.PostExerciseResultByUserName(exerciseResult, User.Identity.Name);
         }
     }
 }
