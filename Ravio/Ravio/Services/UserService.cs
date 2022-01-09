@@ -38,11 +38,15 @@ namespace Ravio.Services
         {
             SecureStorage.RemoveAll();
 
-            await Shell.Current.GoToAsync("StartPage");
+            await Shell.Current.GoToAsync("//StartPage");
         }
 
         public async Task<UserSignDownResponse> SignDownAsync()
         {
+            SecureStorage.RemoveAll();
+
+            await Shell.Current.GoToAsync("//StartPage");
+
             var response = await HttpClient.PostAsJsonAsync("/Users/SignDown", JsonSerializerOptions);
 
             return await response.Content.ReadFromJsonAsync<UserSignDownResponse>(JsonSerializerOptions);

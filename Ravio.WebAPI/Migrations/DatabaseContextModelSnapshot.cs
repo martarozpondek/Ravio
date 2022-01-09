@@ -248,29 +248,6 @@ namespace Ravio.WebAPI.Migrations
                     b.ToTable("BodiesMessurements");
                 });
 
-            modelBuilder.Entity("Ravio.Entities.CoordinatesEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("WorkoutResultEntityId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WorkoutResultEntityId");
-
-                    b.ToTable("Coordinates");
-                });
-
             modelBuilder.Entity("Ravio.Entities.ExerciseEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -420,58 +397,79 @@ namespace Ravio.WebAPI.Migrations
                         new
                         {
                             Id = 3,
-                            Calories = 12,
+                            Calories = 110,
                             Grams = 30,
                             Name = "Ser żółty"
                         },
                         new
                         {
                             Id = 4,
-                            Calories = 63,
+                            Calories = 73,
                             Grams = 125,
                             Name = "Jajko"
                         },
                         new
                         {
                             Id = 5,
-                            Calories = 163,
+                            Calories = 80,
                             Grams = 150,
                             Name = "Pierś z kurczaka"
                         },
                         new
                         {
                             Id = 6,
-                            Calories = 100,
+                            Calories = 1503,
                             Grams = 50,
                             Name = "Ryż biały"
                         },
                         new
                         {
                             Id = 7,
-                            Calories = 33,
-                            Grams = 100,
+                            Calories = 23,
+                            Grams = 120,
                             Name = "Pomidor"
                         },
                         new
                         {
                             Id = 8,
-                            Calories = 134,
+                            Calories = 54,
                             Grams = 250,
                             Name = "Coca-cola"
                         },
                         new
                         {
                             Id = 9,
-                            Calories = 15,
-                            Grams = 20,
+                            Calories = 18,
+                            Grams = 15,
                             Name = "Wędlina drobiowa"
                         },
                         new
                         {
                             Id = 10,
-                            Calories = 150,
+                            Calories = 142,
                             Grams = 200,
                             Name = "Ziemniaki"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Calories = 342,
+                            Grams = 290,
+                            Name = "Jajecznica z szynką"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Calories = 240,
+                            Grams = 500,
+                            Name = "Rosół z makaronem"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Calories = 85,
+                            Grams = 170,
+                            Name = "Jabłko"
                         });
                 });
 
@@ -547,25 +545,25 @@ namespace Ravio.WebAPI.Migrations
                         {
                             Id = 1,
                             Name = "Siedzący",
-                            Parameter = 0.0
+                            Parameter = 1.2
                         },
                         new
                         {
                             Id = 2,
                             Name = "Przeciętny",
-                            Parameter = 0.0
+                            Parameter = 1.3999999999999999
                         },
                         new
                         {
                             Id = 3,
                             Name = "Aktywny",
-                            Parameter = 0.0
+                            Parameter = 1.6000000000000001
                         },
                         new
                         {
                             Id = 4,
                             Name = "Sportowy",
-                            Parameter = 0.0
+                            Parameter = 2.0
                         });
                 });
 
@@ -592,7 +590,7 @@ namespace Ravio.WebAPI.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Utrzymania"
+                            Name = "Utrzymanie"
                         },
                         new
                         {
@@ -880,13 +878,6 @@ namespace Ravio.WebAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Ravio.Entities.CoordinatesEntity", b =>
-                {
-                    b.HasOne("Ravio.Entities.WorkoutResultEntity", null)
-                        .WithMany("Coordinates")
-                        .HasForeignKey("WorkoutResultEntityId");
-                });
-
             modelBuilder.Entity("Ravio.Entities.ExerciseResultEntity", b =>
                 {
                     b.HasOne("Ravio.Entities.ExerciseEntity", "Exercise")
@@ -966,11 +957,6 @@ namespace Ravio.WebAPI.Migrations
                     b.Navigation("FoodResults");
 
                     b.Navigation("WorkoutsResults");
-                });
-
-            modelBuilder.Entity("Ravio.Entities.WorkoutResultEntity", b =>
-                {
-                    b.Navigation("Coordinates");
                 });
 #pragma warning restore 612, 618
         }

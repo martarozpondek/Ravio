@@ -30,7 +30,7 @@ namespace Ravio.Repositories
 
         public async Task PostFoodResult(FoodResultEntity foodResult)
         {
-            await HttpClient.PostAsJsonAsync("/FoodResults", JsonSerializerOptions);
+            await HttpClient.PostAsJsonAsync("/FoodResults", foodResult, JsonSerializerOptions);
         }
     }
 }

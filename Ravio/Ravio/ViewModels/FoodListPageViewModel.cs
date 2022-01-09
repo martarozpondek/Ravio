@@ -13,8 +13,6 @@ namespace Ravio.ViewModels
         public FoodListPageViewModel()
         {
             GoToSearchFoodPageCommand = new Command<string>(GoToSearchFoodPage);
-
-            GetFoodResult();
         }
 
         private FoodResultsService FoodResultsService => DependencyService.Get<FoodResultsService>();

@@ -33,7 +33,6 @@ namespace Ravio.WebAPI
 
         public virtual DbSet<WorkoutEntity> Workouts { get; set; }
         public virtual DbSet<WorkoutResultEntity> WorkoutsResults { get; set; }
-        public virtual DbSet<CoordinatesEntity> Coordinates { get; set; }
 
         public virtual DbSet<ExerciseEntity> Exercises { get; set; }
         public virtual DbSet<ExerciseResultEntity> ExercisesResults { get; set; }
@@ -61,12 +60,12 @@ namespace Ravio.WebAPI
 
             builder.Entity<GenderType>().HasData(new GenderType {Id = 1, Name = "Mężczyzna" });
             builder.Entity<GenderType>().HasData(new GenderType {Id = 2, Name = "Kobieta" });
-            builder.Entity<LifestyleType>().HasData(new LifestyleType { Id=1, Name = "Siedzący" });
-            builder.Entity<LifestyleType>().HasData(new LifestyleType { Id=2, Name = "Przeciętny" });
-            builder.Entity<LifestyleType>().HasData(new LifestyleType { Id=3, Name = "Aktywny" });
-            builder.Entity<LifestyleType>().HasData(new LifestyleType { Id=4, Name = "Sportowy" });
+            builder.Entity<LifestyleType>().HasData(new LifestyleType { Id=1, Name = "Siedzący", Parameter = 1.2 });
+            builder.Entity<LifestyleType>().HasData(new LifestyleType { Id=2, Name = "Przeciętny", Parameter = 1.4 });
+            builder.Entity<LifestyleType>().HasData(new LifestyleType { Id=3, Name = "Aktywny", Parameter = 1.6 });
+            builder.Entity<LifestyleType>().HasData(new LifestyleType { Id=4, Name = "Sportowy", Parameter = 2.0 });
             builder.Entity<TargetType>().HasData(new TargetType { Id=1, Name = "Redukcja" });
-            builder.Entity<TargetType>().HasData(new TargetType { Id=2, Name = "Utrzymania" });
+            builder.Entity<TargetType>().HasData(new TargetType { Id=2, Name = "Utrzymanie" });
             builder.Entity<TargetType>().HasData(new TargetType { Id=3, Name = "Przyrost" });
             builder.Entity<ExerciseEntity>().HasData(new ExerciseEntity { Id=1, Name = "Przysiady", BurningParameter= 1});
             builder.Entity<ExerciseEntity>().HasData(new ExerciseEntity { Id=2, Name = "Pompki", BurningParameter = 1});
@@ -90,14 +89,17 @@ namespace Ravio.WebAPI
             builder.Entity<WorkoutEntity>().HasData(new WorkoutEntity { Id=10, Name = "Żeglowanie", BurningParameter=6 });
             builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =1, Name= "Chleb żytni", Grams= 60, Calories=120});
             builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =2, Name= "Chleb pszenny", Grams= 60, Calories=150});
-            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =3, Name= "Ser żółty", Grams= 30, Calories=12});
-            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =4, Name= "Jajko", Grams= 125, Calories=63});
-            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =5, Name= "Pierś z kurczaka", Grams= 150, Calories=163});
-            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =6, Name= "Ryż biały", Grams= 50, Calories=100});
-            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =7, Name= "Pomidor", Grams= 100, Calories=33});
-            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =8, Name= "Coca-cola", Grams= 250, Calories=134});
-            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =9, Name= "Wędlina drobiowa", Grams= 20, Calories=15});
-            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =10, Name= "Ziemniaki", Grams= 200, Calories=150});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =3, Name= "Ser żółty", Grams= 30, Calories=110});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =4, Name= "Jajko", Grams= 125, Calories=73});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =5, Name= "Pierś z kurczaka", Grams= 150, Calories=80});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =6, Name= "Ryż biały", Grams= 50, Calories=1503});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =7, Name= "Pomidor", Grams= 120, Calories=23});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =8, Name= "Coca-cola", Grams= 250, Calories=54});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =9, Name= "Wędlina drobiowa", Grams= 15, Calories=18});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =10, Name= "Ziemniaki", Grams= 200, Calories=142});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =11, Name= "Jajecznica z szynką", Grams= 290, Calories=342});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =12, Name= "Rosół z makaronem", Grams= 500, Calories=240});
+            builder.Entity<FoodEntity>().HasData(new FoodEntity { Id =13, Name= "Jabłko", Grams= 170, Calories=85});
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

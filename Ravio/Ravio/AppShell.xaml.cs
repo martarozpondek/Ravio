@@ -9,12 +9,6 @@ namespace Ravio
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(StartPage), typeof(StartPage));
-            Routing.RegisterRoute(nameof(WelcomePage), typeof(WelcomePage));
-
-            Routing.RegisterRoute(nameof(SignInPage), typeof(SignInPage));
-            Routing.RegisterRoute(nameof(SignUpPage), typeof(SignUpPage));
-
             Routing.RegisterRoute(nameof(WorkoutsPage), typeof(WorkoutsPage));
             Routing.RegisterRoute(nameof(ExercisesPage), typeof(ExercisesPage));
             Routing.RegisterRoute(nameof(FoodPage), typeof(FoodPage));

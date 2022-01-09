@@ -80,7 +80,7 @@ namespace Ravio.WebAPI.Services
 
             await BodiesMessurementsRepository.PostBodyMessurementsByUserName(new BodyMessurementsEntity() { User = user, Date = DateTime.Now, Weight = request.Weight, Height = request.Height, WaistMessurement = request.WaistMessurement, ChestMessurement = request.ChestMessurement, HipsMessurement = request.HipsMessurement, StomachMessurement = request.StomachMessurement, ThighMessurement = request.ThighMessurement }, userName);
 
-            return new UserCompleteProfileResponse(true, "", user.Target);
+            return new UserCompleteProfileResponse(true, "");
         }
 
         public async Task<UserSignDownResponse> SignDownAsync(UserSignDownRequest request)

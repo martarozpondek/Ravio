@@ -14,8 +14,6 @@ namespace Ravio.ViewModels
         {
             GoToComponentCommand = new Command<string>(GoToComponent);
 
-            AddFoodResult();
-
             CheckWorkoutAward();
             CheckExerciseAward();
             CheckFoodAward();
@@ -28,31 +26,22 @@ namespace Ravio.ViewModels
 
         private AwardsService AwardsService => DependencyService.Get<AwardsService>();
 
-        public async Task AddFoodResult()
+        public async Task GetFoodResult()
         {
-            Device.StartTimer(TimeSpan.FromMinutes(1), () =>
+            int targetCalories = 0;
+
+            if (await SecureStorage.GetAsync("GenderName") == "Kobieta")
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    if (DateTime.Now.TimeOfDay == new TimeSpan(0, 0, 0))
-                    {
-                        int targetCalories = 0;
-
-                        if (await SecureStorage.GetAsync("Gender") == "Kobieta")
-                        {
-                            targetCalories = (int)((10 * (Convert.ToInt32(await SecureStorage.GetAsync("Weight")))) + (6.25 * (Convert.ToInt32(await SecureStorage.GetAsync("Height")))) - (5 * (Convert.ToInt32(await SecureStorage.GetAsync("Age")))) - 161)* (Convert.ToInt32(await SecureStorage.GetAsync("Lifestyle")));
-                        }
-                        if (await SecureStorage.GetAsync("Gender") == "Mężczyzna")
-                        {
-                            targetCalories = (int)((10 * (Convert.ToInt32(await SecureStorage.GetAsync("Weight")))) + (6.25 * (Convert.ToInt32(await SecureStorage.GetAsync("Height")))) - (5 * (Convert.ToInt32(await SecureStorage.GetAsync("Age")))) +5) * (Convert.ToInt32(await SecureStorage.GetAsync("Lifestyle")));
-                        }
-
-                        var foodResult = new FoodResultEntity() { TargetCalories = targetCalories, Date = DateTime.Now };
-                        await FoodResultsService.PostFoodResult(foodResult);
-                    }
-                });
-                return true;
-            });
+                targetCalories = Convert.ToInt32(((10 * (Convert.ToInt32(await SecureStorage.GetAsync("Weight")))) + (6.25 * (Convert.ToInt32(await SecureStorage.GetAsync("Height")))) - (5 * (Convert.ToInt32(await SecureStorage.GetAsync("Age")))) - 161) * (Convert.ToDouble(await SecureStorage.GetAsync("Lifestyle"))));
+            }
+           
+            if (await SecureStorage.GetAsync("GenderName") == "Mężczyzna")
+            {
+                targetCalories = Convert.ToInt32(((10 * (Convert.ToInt32(await SecureStorage.GetAsync("Weight")))) + (6.25 * (Convert.ToInt32(await SecureStorage.GetAsync("Height")))) - (5 * (Convert.ToInt32(await SecureStorage.GetAsync("Age")))) + 5) * (Convert.ToDouble(await SecureStorage.GetAsync("Lifestyle"))));
+            }
+            
+            var foodResult = new FoodResultEntity() { TargetCalories = targetCalories, Date = DateTime.Now };
+            await FoodResultsService.PostFoodResult(foodResult);
         }
 
         public async Task CheckWorkoutAward()

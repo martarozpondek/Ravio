@@ -13,7 +13,6 @@ namespace Ravio.Views
         {
             var ViewModel = BindingContext as ViewModels.WorkoutResultPageViewModel;
             await ViewModel.GetWorkoutResult();
-            await ViewModel.CreateMapLine();
         }
     }
 }

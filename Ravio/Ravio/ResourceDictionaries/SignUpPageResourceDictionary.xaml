@@ -18,16 +18,29 @@
         <Setter Property="TextColor" Value="{StaticResource AccentColor}"/>
     </Style>
 
+    <Style TargetType="Label" x:Key="Error" >
+        <Setter Property="WidthRequest" Value="385"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="TextColor" Value="#750000"/>
+    </Style>
+
     <Style TargetType="Entry">
-        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="WidthRequest" Value="160"/>
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="VerticalTextAlignment" Value="Center"/>
     </Style>
 
     <Style TargetType="Picker">
-        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="WidthRequest" Value="160"/>
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="VerticalTextAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <Setter Property="WidthRequest" Value="160"/>
     </Style>
 
     <Style TargetType="Button">

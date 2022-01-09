@@ -9,6 +9,18 @@
     Shell.TitleColor="{StaticResource AccentColor}"
     Shell.UnselectedColor="{StaticResource SecondaryForegroundColor}"
     Title="Ravio">
+    <ShellItem Route="StartPage">
+        <ShellContent ContentTemplate="{DataTemplate Views:StartPage}"/>
+    </ShellItem>
+    <ShellItem Route="SignInPage">
+        <ShellContent ContentTemplate="{DataTemplate Views:SignInPage}"/>
+    </ShellItem>
+    <ShellItem Route="SignUpPage">
+        <ShellContent ContentTemplate="{DataTemplate Views:SignUpPage}"/>
+    </ShellItem>
+    <ShellItem Route="WelcomePage">
+        <ShellContent ContentTemplate="{DataTemplate Views:WelcomePage}"/>
+    </ShellItem>
     <TabBar>
         <ShellContent Title="Strona główna" Icon="HomePage.png" Route="HomePage" ContentTemplate="{DataTemplate Views:HomePage}"/>
         <ShellContent Title="Wiadomości" Icon="NewsPage.png" Route="NewsPage" ContentTemplate="{DataTemplate Views:NewsPage}"/>

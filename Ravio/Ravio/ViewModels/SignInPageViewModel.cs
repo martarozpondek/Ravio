@@ -50,7 +50,7 @@ namespace Ravio.ViewModels
                 await SecureStorage.SetAsync("Token", Response.Token);
                 var xd = await SecureStorage.GetAsync("Token");
                 HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Response.Token);
-                await Shell.Current.GoToAsync("///HomePage");
+                await Shell.Current.GoToAsync("//HomePage");
             }
             else
             {

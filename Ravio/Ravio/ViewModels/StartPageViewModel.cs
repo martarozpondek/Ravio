@@ -13,13 +13,13 @@ namespace Ravio.ViewModels
         public Command GoToSignInPageCommand { get; set; }
         private async void GoToSignInPage()
         {
-            await Shell.Current.GoToAsync("SignInPage");
+            await Shell.Current.GoToAsync("//SignInPage");
         }
 
         public Command GoToSignUpPageCommand { get; set; }
         private async void GoToSignUpPage()
         {
-            await Shell.Current.GoToAsync("SignUpPage");
+            await Shell.Current.GoToAsync("//SignUpPage");
         }
     }
 }

@@ -412,27 +412,6 @@ namespace Ravio.WebAPI.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Coordinates",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Latitude = table.Column<double>(type: "float", nullable: false),
-                    Longitude = table.Column<double>(type: "float", nullable: false),
-                    WorkoutResultEntityId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Coordinates", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Coordinates_WorkoutsResults_WorkoutResultEntityId",
-                        column: x => x.WorkoutResultEntityId,
-                        principalTable: "WorkoutsResults",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.InsertData(
                 table: "Exercises",
                 columns: new[] { "Id", "BurningParameter", "Name" },
@@ -455,16 +434,19 @@ namespace Ravio.WebAPI.Migrations
                 columns: new[] { "Id", "Calories", "Grams", "Name" },
                 values: new object[,]
                 {
-                    { 9, 15, 20, "Wędlina drobiowa" },
-                    { 8, 134, 250, "Coca-cola" },
-                    { 7, 33, 100, "Pomidor" },
-                    { 6, 100, 50, "Ryż biały" },
-                    { 10, 150, 200, "Ziemniaki" },
-                    { 4, 63, 125, "Jajko" },
-                    { 3, 12, 30, "Ser żółty" },
+                    { 13, 85, 170, "Jabłko" },
+                    { 12, 240, 500, "Rosół z makaronem" },
+                    { 10, 142, 200, "Ziemniaki" },
+                    { 9, 18, 15, "Wędlina drobiowa" },
+                    { 8, 54, 250, "Coca-cola" },
+                    { 7, 23, 120, "Pomidor" },
+                    { 11, 342, 290, "Jajecznica z szynką" },
+                    { 5, 80, 150, "Pierś z kurczaka" },
+                    { 4, 73, 125, "Jajko" },
+                    { 3, 110, 30, "Ser żółty" },
                     { 2, 150, 60, "Chleb pszenny" },
                     { 1, 120, 60, "Chleb żytni" },
-                    { 5, 163, 150, "Pierś z kurczaka" }
+                    { 6, 1503, 50, "Ryż biały" }
                 });
 
             migrationBuilder.InsertData(
@@ -481,10 +463,10 @@ namespace Ravio.WebAPI.Migrations
                 columns: new[] { "Id", "Name", "Parameter" },
                 values: new object[,]
                 {
-                    { 1, "Siedzący", 0.0 },
-                    { 2, "Przeciętny", 0.0 },
-                    { 3, "Aktywny", 0.0 },
-                    { 4, "Sportowy", 0.0 }
+                    { 1, "Siedzący", 1.2 },
+                    { 2, "Przeciętny", 1.3999999999999999 },
+                    { 3, "Aktywny", 1.6000000000000001 },
+                    { 4, "Sportowy", 2.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -494,7 +476,7 @@ namespace Ravio.WebAPI.Migrations
                 {
                     { 3, "Przyrost" },
                     { 1, "Redukcja" },
-                    { 2, "Utrzymania" }
+                    { 2, "Utrzymanie" }
                 });
 
             migrationBuilder.InsertData(
@@ -584,11 +566,6 @@ namespace Ravio.WebAPI.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Coordinates_WorkoutResultEntityId",
-                table: "Coordinates",
-                column: "WorkoutResultEntityId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ExercisesResults_ExerciseId",
                 table: "ExercisesResults",
                 column: "ExerciseId");
@@ -641,13 +618,13 @@ namespace Ravio.WebAPI.Migrations
                 name: "BodiesMessurements");
 
             migrationBuilder.DropTable(
-                name: "Coordinates");
-
-            migrationBuilder.DropTable(
                 name: "ExercisesResults");
 
             migrationBuilder.DropTable(
                 name: "Food");
+
+            migrationBuilder.DropTable(
+                name: "WorkoutsResults");
 
             migrationBuilder.DropTable(
                 name: "FoodResults");
@@ -656,16 +633,13 @@ namespace Ravio.WebAPI.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "WorkoutsResults");
-
-            migrationBuilder.DropTable(
                 name: "Exercises");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Workouts");
 
             migrationBuilder.DropTable(
-                name: "Workouts");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "GenderTypes");

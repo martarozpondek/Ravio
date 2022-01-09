@@ -12,8 +12,6 @@ namespace Ravio.ViewModels
     {
         public WorkoutResultPageViewModel()
         {
-            Map = new Xamarin.Forms.Maps.Map();
-
             GoToHomePageCommand = new Command(GoToHomePage);
         }
 
@@ -26,30 +24,11 @@ namespace Ravio.ViewModels
             set { SetProperty(ref workoutResultid, value); }
         }
 
-        private Xamarin.Forms.Maps.Map map;
-        public Xamarin.Forms.Maps.Map Map
-        {
-            get { return map; }
-            set { SetProperty(ref map, value); }
-        }
-
         private WorkoutResultEntity workoutResult;
         public WorkoutResultEntity WorkoutResult
         {
             get { return workoutResult; }
             set { SetProperty(ref workoutResult, value); }
-        }
-
-        public async Task CreateMapLine()
-        {
-            Polyline Line = new Polyline() { StrokeColor = Color.Purple, StrokeWidth = 10 };
-            foreach (var coordinates in WorkoutResult.Coordinates)
-            {
-                var position = new Position(coordinates.Latitude, coordinates.Longitude);
-                Line.Geopath.Add(position);
-            }
-
-            Map.MapElements.Add(Line);
         }
 
         public async Task GetWorkoutResult()

@@ -37,7 +37,10 @@
             </StackLayout>
             <StackLayout>
                 <Label Text="Płeć: "/>
-                <Picker ItemsSource="{Binding Genders}" SelectedItem="{Binding UserSignUpRequest.Gender}"/>
+                <Picker ItemsSource="{Binding Genders}" SelectedIndex="{Binding UserSignUpRequest.GenderTypeId}"/>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="{Binding Error}" Style="{StaticResource Error}"/>
             </StackLayout>
             <Button Text="Dalej" Command="{Binding SignUpCommand}"/>
         </FlexLayout>

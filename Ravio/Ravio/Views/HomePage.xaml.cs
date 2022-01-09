@@ -8,5 +8,11 @@ namespace Ravio.Views
         {
             InitializeComponent();
         }
+
+        protected override async void OnAppearing()
+        {
+            var ViewModel = BindingContext as ViewModels.HomePageViewModel;
+            await ViewModel.GetFoodResult();
+        }
     }
 }

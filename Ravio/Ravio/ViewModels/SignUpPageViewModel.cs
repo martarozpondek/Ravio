@@ -57,6 +57,7 @@ namespace Ravio.ViewModels
         public Command SignUpCommand { get; set; }
         private async void SignUp()
         {
+            UserSignUpRequest.GenderTypeId += 1;
             var Response = await UserService.SignUpAsync(UserSignUpRequest);
             if (Response.IsSucceeded)
             {
@@ -64,9 +65,8 @@ namespace Ravio.ViewModels
                 await SecureStorage.SetAsync("GenderName", Response.GenderName);
                 await SecureStorage.SetAsync("Age", Convert.ToString(Response.Age));
                 await SecureStorage.SetAsync("Token", Response.Token);
-                var xd = await SecureStorage.GetAsync("Token");
                 HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Response.Token);
-                await Shell.Current.GoToAsync("WelcomePage");
+                await Shell.Current.GoToAsync("//WelcomePage");
             }
             else
             {

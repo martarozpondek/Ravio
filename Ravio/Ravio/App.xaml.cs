@@ -53,18 +53,10 @@ namespace Ravio
 
         protected override async void OnStart()
         {
-            var siema1 = await SecureStorage.GetAsync("Token");
-            var siema2 = await SecureStorage.GetAsync("GenderName");
-
-            if (await SecureStorage.GetAsync("Token") == null)
+            if (await SecureStorage.GetAsync("Token") != null)
             {
-                await Shell.Current.GoToAsync("/StartPage");
-            }
-
-            else
-            {
+                await Shell.Current.GoToAsync("//HomePage");
                 HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await SecureStorage.GetAsync("Token"));
-
             }
         }
     }

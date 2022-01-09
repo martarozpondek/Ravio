@@ -25,8 +25,6 @@ namespace Ravio.Entities
         [JsonIgnore]
         public int? Calories { get { return Convert.ToInt32(Time.TotalMinutes * Workout.BurningParameter); } set { } }
 
-        public ICollection<CoordinatesEntity> Coordinates { get; set; }
-
         public int? WorkoutId { get; set; }
         public virtual WorkoutEntity Workout { get; set; }
 

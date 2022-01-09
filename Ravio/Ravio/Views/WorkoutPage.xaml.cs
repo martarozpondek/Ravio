@@ -21,6 +21,7 @@ namespace Ravio.Views
         {
             var ViewModel = BindingContext as ViewModels.WorkoutPageViewModel;
             await ViewModel.GetWorkout();
+            await ViewModel.StartWorkout();
         }
     }
 }

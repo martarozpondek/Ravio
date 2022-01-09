@@ -66,7 +66,7 @@ namespace Ravio.ViewModels
                 await SecureStorage.SetAsync("Height", Convert.ToString(CompleteProfileRequest.Height));
                 await SecureStorage.SetAsync("Target", CompleteProfileRequest.Target.Name);
                 await SecureStorage.SetAsync("Lifestyle", Convert.ToString(CompleteProfileRequest.Lifestyle.Parameter));
-                await Shell.Current.GoToAsync("///HomePage");
+                await Shell.Current.GoToAsync("//////HomePage");
             }
 
             CompleteProfileRequest = new UserCompleteProfileRequest();

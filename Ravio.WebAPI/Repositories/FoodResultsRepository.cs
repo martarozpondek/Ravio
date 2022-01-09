@@ -37,12 +37,15 @@ namespace Ravio.WebAPI.Repositories
 
         public async Task PostFoodResultByUserName(FoodResultEntity foodResult, string userName)
         {
-            var user = await DatabaseContext.Accounts.FirstOrDefaultAsync(account => account.UserName == userName);
-            foodResult.UserId = user.Id;
+            if (await GetCurrentFoodResult(userName) == null)
+            {
+                var user = await DatabaseContext.Accounts.FirstOrDefaultAsync(account => account.UserName == userName);
+                foodResult.UserId = user.Id;
 
-            await DatabaseContext.FoodResults.AddAsync(foodResult);
+                await DatabaseContext.FoodResults.AddAsync(foodResult);
 
-            await DatabaseContext.SaveChangesAsync();
+                await DatabaseContext.SaveChangesAsync();
+            }
         }
     }
 }

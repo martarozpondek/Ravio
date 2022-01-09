@@ -15,13 +15,9 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Frame Content="{Binding Map}"/>
-            </Grid>
-            <Grid Grid.Row="1">
                 <FlexLayout JustifyContent="SpaceAround" AlignItems="Center" Direction="Row" Wrap="Wrap">
                     <StackLayout>
                         <Label Text="Kalorie:" Style="{StaticResource Title}"/>
@@ -29,11 +25,11 @@
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Dystans:" Style="{StaticResource Title}"/>
-                        <Label Text="{Binding WorkoutResult.Distance, StringFormat='{0} km'}"/>
+                        <Label Text="{Binding WorkoutResult.Distance, StringFormat='{0:F2} km'}"/>
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Średnia prędkość:" Style="{StaticResource Title}"/>
-                        <Label Text="{Binding WorkoutResult.AverageSpeed, StringFormat='{0} m/s'}"/>
+                        <Label Text="{Binding WorkoutResult.AverageSpeed, StringFormat='{0:F2} m/s'}"/>
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Czas startu:" Style="{StaticResource Title}"/>
@@ -45,11 +41,11 @@
                     </StackLayout>
                     <StackLayout>
                         <Label Text="Łączny czas:" Style="{StaticResource Title}"/>
-                        <Label Text="{Binding WorkoutResult.Time, StringFormat='{0:HH\\:mm\\:ss}'}"/>
+                        <Label Text="{Binding WorkoutResult.Time, StringFormat='\{0:hh\\:mm\\:ss\\.ff\}'}"/>
                     </StackLayout>
                 </FlexLayout>
             </Grid>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
                 <Button Text="Wyjście" Command="{Binding GoToHomePageCommand}" />
             </Grid>
         </Grid>

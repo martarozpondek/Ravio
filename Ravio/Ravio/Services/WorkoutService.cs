@@ -30,15 +30,13 @@ namespace Ravio.Services
             return await WorkoutsResultsRepository.Add(workoutResult);
         }
 
-        public double CalculateDistanceBetweenPoints(ICollection<CoordinatesEntity> coordinates)
+        public double CalculateDistanceBetweenPoints(List<Position> positions)
         {
             double Distance = 0;
 
-            var CoordinatesList = coordinates.ToList();
-
-            for (int Iterator = 1; Iterator < coordinates.Count; Iterator++)
+            for (int Iterator = 1; Iterator < positions.Count; Iterator++)
             {
-                Distance += Location.CalculateDistance(new Location(CoordinatesList[Iterator].Latitude, CoordinatesList[Iterator].Longitude), new Location(CoordinatesList[Iterator - 1].Latitude, CoordinatesList[Iterator - 1].Longitude), DistanceUnits.Kilometers);
+                Distance += Location.CalculateDistance(new Location(positions[Iterator].Latitude, positions[Iterator].Longitude), new Location(positions[Iterator - 1].Latitude, positions[Iterator - 1].Longitude), DistanceUnits.Kilometers);
             }
 
             return Distance;
