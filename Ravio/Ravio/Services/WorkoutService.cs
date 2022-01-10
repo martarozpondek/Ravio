@@ -16,12 +16,24 @@ namespace Ravio.Services
         public async Task<Position> GetUserPosition()
         {
             var location = await Geolocation.GetLocationAsync();
+            if (location == null)
+            {
+                string s = "";
+            }
             return new Position(location.Latitude, location.Longitude);
         }
 
         public async Task<double> GetUserSpeed()
         {
             var location = await Geolocation.GetLocationAsync();
+            if (location == null)
+            {
+                string s = "";
+            }
+            if (location.Speed == null)
+            {
+                return 0.0;
+            }
             return location.Speed.Value;
         }
 

@@ -45,6 +45,7 @@
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="VerticalTextAlignment" Value="Center"/>
         <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="TextColor" Value="{StaticResource PrimaryForegroundColor}"/>
     </Style>
 
@@ -52,7 +53,7 @@
         <ViewCell>
             <FlexLayout Direction="Row" JustifyContent="SpaceAround" AlignItems="Center">
                 <Label Text="{Binding Workout.Name}"/>
-                <Label Text="{Binding Distance}"/>
+                <Label Text="{Binding Distance, StringFormat='{0:F2} km'}"/>
                 <Label Text="{Binding Calories}"/>
                 <Label Text="{Binding StartTime, StringFormat='{0:dd-MM-yyyy}'}"/>
             </FlexLayout>

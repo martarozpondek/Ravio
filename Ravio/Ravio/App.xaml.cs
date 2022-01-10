@@ -16,7 +16,7 @@ namespace Ravio
         {
             InitializeComponent();
 
-            DependencyService.RegisterSingleton(new HttpClient() { BaseAddress = new Uri("http://192.168.2.50") });
+            DependencyService.RegisterSingleton(new HttpClient() { BaseAddress = new Uri("http://192.168.43.182") });
             DependencyService.RegisterSingleton(new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve, PropertyNameCaseInsensitive = true, WriteIndented = true });
 
             DependencyService.Register<UserService>();

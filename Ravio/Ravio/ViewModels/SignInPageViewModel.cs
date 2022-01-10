@@ -38,7 +38,7 @@ namespace Ravio.ViewModels
         public Command GoToSignUpPageCommand { get; set; }
         private async void GoToSignUpPage()
         {
-            await Shell.Current.GoToAsync("/SignUpPage");
+            await Shell.Current.GoToAsync("//SignUpPage");
         }
 
         public Command SignInCommand { get; set; }
@@ -48,7 +48,6 @@ namespace Ravio.ViewModels
             if (Response.IsSucceeded)
             {
                 await SecureStorage.SetAsync("Token", Response.Token);
-                var xd = await SecureStorage.GetAsync("Token");
                 HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Response.Token);
                 await Shell.Current.GoToAsync("//HomePage");
             }
@@ -57,6 +56,7 @@ namespace Ravio.ViewModels
                 Error = Response.Error;
             }
 
+            Error = string.Empty;
             UserSignInRequest = new UserSignInRequest();
         }
     }

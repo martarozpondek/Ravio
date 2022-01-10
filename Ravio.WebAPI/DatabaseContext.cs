@@ -106,7 +106,7 @@ namespace Ravio.WebAPI
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Data Source=SERVER-ROBIRT\\SQLDEVELOPER;Initial Catalog=Ravio;User Id=sa;Password=CortX-1RDS;");
+            optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=Ravio;Integrated Security=True;");
         }
     }
 }
